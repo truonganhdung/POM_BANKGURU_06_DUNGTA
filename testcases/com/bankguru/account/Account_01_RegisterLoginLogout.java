@@ -41,8 +41,8 @@ public class Account_01_RegisterLoginLogout {
 		// get info after registering
 		userID = driver.findElement(By.xpath("//td[text()='User ID :']/following-sibling::td")).getText();
 		password = driver.findElement(By.xpath("//td[text()='Password :']/following-sibling::td")).getText();
-		// System.out.println(userID);
-		// System.out.println(password);
+		 System.out.println(userID);
+		 System.out.println(password);
 	}
 
 	@Test
