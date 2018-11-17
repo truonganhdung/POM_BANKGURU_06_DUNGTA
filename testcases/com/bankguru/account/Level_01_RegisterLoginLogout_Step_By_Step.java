@@ -13,7 +13,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class Account_01_RegisterLoginLogout {
+public class Level_01_RegisterLoginLogout_Step_By_Step {
 	WebDriver driver;
 	String email, userID, password, loginURL;
 
