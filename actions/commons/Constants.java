@@ -1,19 +1,8 @@
 package commons;
 
-import org.testng.annotations.Test;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.AfterClass;
-
 public class Constants {
-  @Test
-  public void f() {
-  }
-  @BeforeClass
-  public void beforeClass() {
-  }
-
-  @AfterClass
-  public void afterClass() {
-  }
+	public static final String DEV_URL = "http://demo.guru99.com/v4/";
+	public static final String TEST_URL = "http://test.guru99.com/v4/";
+	public static final String STAGING_URL = "http://staging.guru99.com/v4/";
 
 }

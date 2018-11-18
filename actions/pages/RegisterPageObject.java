@@ -1,19 +1,38 @@
 package pages;
 
-import org.testng.annotations.Test;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.AfterClass;
+import org.openqa.selenium.WebDriver;
 
-public class RegisterPageObject {
-  @Test
-  public void f() {
-  }
-  @BeforeClass
-  public void beforeClass() {
-  }
+import bankguru.RegisterPageUI;
+import commons.AbstractPage;
 
-  @AfterClass
-  public void afterClass() {
-  }
+public class RegisterPageObject extends AbstractPage {
+	private WebDriver driverRegisterPageObject;
 
+	public RegisterPageObject(WebDriver driverTestCase) {
+		this.driverRegisterPageObject = driverTestCase;
+	}
+	
+	public void inputToEmailTextBox(String email) {
+		waitForControlVisible(driverRegisterPageObject, RegisterPageUI.EMAILID_TEXTBOX);
+		sendkeyToElement(driverRegisterPageObject, RegisterPageUI.EMAILID_TEXTBOX, email);
+	}
+
+	public void clickToSubmitButton() {
+		waitForControlVisible(driverRegisterPageObject, RegisterPageUI.SUBMIT_BUTTON);
+		clickToElement(driverRegisterPageObject, RegisterPageUI.SUBMIT_BUTTON);
+	}
+
+	public String getUserIDText() {
+		waitForControlVisible(driverRegisterPageObject, RegisterPageUI.USER_ID_TEXT);
+		return getTextElement(driverRegisterPageObject, RegisterPageUI.USER_ID_TEXT);
+	}
+
+	public String getPasswordText() {
+		waitForControlVisible(driverRegisterPageObject, RegisterPageUI.PASSWORD_TEXT);
+		return getTextElement(driverRegisterPageObject, RegisterPageUI.PASSWORD_TEXT);
+	}
+	
+	public void openLoginPageByUrl(String loginPageUrl) {
+		openAnyUrl(driverRegisterPageObject, loginPageUrl);
+	}
 }

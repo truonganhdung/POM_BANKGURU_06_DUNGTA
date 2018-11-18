@@ -1,19 +1,9 @@
 package bankguru;
 
-import org.testng.annotations.Test;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.AfterClass;
-
 public class RegisterPageUI {
-  @Test
-  public void f() {
-  }
-  @BeforeClass
-  public void beforeClass() {
-  }
-
-  @AfterClass
-  public void afterClass() {
-  }
-
+	public static final String EMAILID_TEXTBOX = "//input[@name='emailid']";
+	public static final String SUBMIT_BUTTON = "//input[@type='submit']";
+	public static final String USER_ID_TEXT = "//td[text()='User ID :']/following-sibling::td";
+	public static final String PASSWORD_TEXT = "//td[text()='Password :']/following-sibling::td";
+	
 }
