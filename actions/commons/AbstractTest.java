@@ -11,7 +11,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 
 public class AbstractTest {
 	WebDriver driverAbstractTest;
-	
+
 	public WebDriver openMultiBrowser(String browserName) {
 		if (browserName.equals("firefox")) {
 			driverAbstractTest = new FirefoxDriver();
@@ -44,4 +44,42 @@ public class AbstractTest {
 		return random;
 	}
 
+	protected void closeBrowser(WebDriver driver) {
+		try {
+			// IE-11
+			driver.manage().deleteAllCookies();
+
+			String osName = System.getProperty("os.name").toLowerCase();
+			String cmd = "";
+			// Quit browser
+			driver.quit();
+
+			// Quit process
+			if (driver.toString().toLowerCase().contains("chrome")) {
+				if (osName.contains("mac")) {
+					cmd = "pkill chromedriver";
+				} else {
+					cmd = "taskkill /F /FI \"IMAGENAME eq chromedriver*\"";
+				}
+
+				// Execute process
+				Process process = Runtime.getRuntime().exec(cmd);
+				process.waitFor();
+			}
+			if (driver.toString().toLowerCase().contains("internetexplorer")) {
+				cmd = "taskkill /F /FI \"IMAGENAME eq IEDriverServer*\"";
+				Process process = Runtime.getRuntime().exec(cmd);
+				process.waitFor();
+			}
+
+			if (driver.toString().toLowerCase().contains("firefox")) {
+				cmd = "taskkill /F /FI \"IMAGENAME eq geckodriver*\"";
+				Process process = Runtime.getRuntime().exec(cmd);
+				process.waitFor();
+			}
+			System.out.println("----------- Quit Process -----------");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
 }

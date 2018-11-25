@@ -12,7 +12,7 @@ import pages.HomePageObject;
 import pages.LoginPageObject;
 import pages.RegisterPageObject;
 
-public class Level_03_RegisterLoginLogout_PageObject extends AbstractTest{
+public class Level_03_RegisterLoginLogout_PageObject extends AbstractTest {
 	WebDriver driverTestCase;
 	String email, userID, password, loginURL;
 
@@ -24,7 +24,7 @@ public class Level_03_RegisterLoginLogout_PageObject extends AbstractTest{
 	@BeforeClass
 	public void beforeClass(String browserName) {
 		driverTestCase = openMultiBrowser(browserName);
-		
+
 		loginPage = new LoginPageObject(driverTestCase);
 
 		email = "automations" + randomNumber() + "@gmail.com";
@@ -51,18 +51,18 @@ public class Level_03_RegisterLoginLogout_PageObject extends AbstractTest{
 		loginPage.inputToUserIDTextbox(userID);
 		loginPage.inputToPasswordTextbox(password);
 		loginPage.clickToLoginButton();
-		
+
 		homePage = new HomePageObject(driverTestCase);
 		Assert.assertTrue(homePage.isHomePageDisplay());
 	}
-	
-	 @Test
-	 public void TC_03_LogoutToSystem() {
-		homePage.clickToLogoutLink();
-		
+
+	@Test
+	public void TC_03_LogoutToSystem() {
+//		homePage.clickToLogoutLink();
+
 		loginPage = new LoginPageObject(driverTestCase);
 		Assert.assertTrue(loginPage.isLoginPageDisplayed());
-	 }
+	}
 
 	@AfterClass
 	public void afterClass() {

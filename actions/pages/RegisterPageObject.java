@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import bankguru.RegisterPageUI;
 import commons.AbstractPage;
+import commons.PageFactoryManager;
 
 public class RegisterPageObject extends AbstractPage {
 	private WebDriver driverRegisterPageObject;
@@ -32,7 +33,9 @@ public class RegisterPageObject extends AbstractPage {
 		return getTextElement(driverRegisterPageObject, RegisterPageUI.PASSWORD_TEXT);
 	}
 	
-	public void openLoginPageByUrl(String loginPageUrl) {
+	public LoginPageObject openLoginPageByUrl(String loginPageUrl) {
 		openAnyUrl(driverRegisterPageObject, loginPageUrl);
+//		return new LoginPageObject(driverRegisterPageObject);
+		return PageFactoryManager.getLogInPage(driverRegisterPageObject);
 	}
 }

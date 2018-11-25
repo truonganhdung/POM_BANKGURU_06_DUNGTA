@@ -18,10 +18,18 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import bankguru.AbstractPageUI;
+import pages.DepositPageObject;
+import pages.EditCustomerPageObject;
+import pages.FundTransferPageObject;
+import pages.HomePageObject;
+import pages.LoginPageObject;
+import pages.NewCustomerPageObject;
+
 public class AbstractPage {
 	private Actions action;
 	private String root = System.getProperty("user.dir");
-	
+
 	private WebDriverWait wait;
 	private int longTimeOut = 20;
 
@@ -102,7 +110,7 @@ public class AbstractPage {
 
 	public void selectItemInCustomDropdown(WebDriver driver, WebDriverWait wait, String parentLocator, String allItemsLocator, String expectedValue) throws Exception {
 		clickToElementByJS(driver, parentLocator);
-		
+
 		Thread.sleep(1000);
 
 		List<WebElement> allItemsDropDown = driver.findElements(By.xpath(allItemsLocator));
@@ -202,7 +210,7 @@ public class AbstractPage {
 
 	public void switchToIframe(WebDriver driver, String xpathIframe, String xpathIconX) {
 		List<WebElement> iFrame = driver.findElements(By.xpath(xpathIframe));
-		
+
 		if (iFrame.size() > 0) {
 			driver.switchTo().frame(iFrame.get(0));
 
@@ -405,34 +413,78 @@ public class AbstractPage {
 
 	public void waitForControlPrecense(WebDriver driver, String xpathExpression) {
 		By by = By.xpath(xpathExpression);
-		
+
 		wait = new WebDriverWait(driver, longTimeOut);
 		wait.until(ExpectedConditions.presenceOfElementLocated(by));
 	}
 
 	public void waitForControlVisible(WebDriver driver, String xpathExpression) {
 		By by = By.xpath(xpathExpression);
-		
+
 		wait = new WebDriverWait(driver, longTimeOut);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(by));
 	}
 
 	public void waitForControlNotVisible(WebDriver driver, String xpathExpression) {
 		By by = By.xpath(xpathExpression);
-		
+
 		wait = new WebDriverWait(driver, longTimeOut);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
 	}
-	
+
 	public void waitForControlClickable(WebDriver driver, String xpathExpression) {
 		By by = By.xpath(xpathExpression);
-		
+
 		wait = new WebDriverWait(driver, longTimeOut);
 		wait.until(ExpectedConditions.elementToBeClickable(by));
 	}
-	
+
 	public void waitForAlertPresence(WebDriver driver) {
 		wait = new WebDriverWait(driver, longTimeOut);
 		wait.until(ExpectedConditions.alertIsPresent());
+	}
+
+	/*** Open Dynamic Pages ***/
+	public HomePageObject openHomePage(WebDriver driver) {
+		waitForControlVisible(driver, AbstractPageUI.HOME_PAGE_LINK);
+		clickToElement(driver, AbstractPageUI.HOME_PAGE_LINK);
+//		return new HomePageObject(driver);
+		return PageFactoryManager.getHomePage(driver);
+	}
+	
+	public NewCustomerPageObject openNewCustomerPage(WebDriver driver) {
+		waitForControlVisible(driver, AbstractPageUI.NEW_CUSTOMER_LINK);
+		clickToElement(driver, AbstractPageUI.NEW_CUSTOMER_LINK);
+//		return new NewCustomerPageObject(driver);
+		return PageFactoryManager.getNewCustomerPage(driver);
+	}
+	
+	public EditCustomerPageObject openEditCustomerPage(WebDriver driver) {
+		waitForControlVisible(driver, AbstractPageUI.EDIT_CUSTOMER_LINK);
+		clickToElement(driver, AbstractPageUI.EDIT_CUSTOMER_LINK);
+//		return new EditCustomerPageObject(driver);
+		return PageFactoryManager.getEditCustomerPage(driver);
+	}
+	
+	public DepositPageObject openDepositPage(WebDriver driver) {
+		waitForControlVisible(driver, AbstractPageUI.DEPOSIT_LINK);
+		clickToElement(driver, AbstractPageUI.DEPOSIT_LINK);
+//		return new DepositPageObject(driver);
+		return PageFactoryManager.getDepositPage(driver);
+	}
+	
+	public FundTransferPageObject openFundTransferPage(WebDriver driver) {
+		waitForControlVisible(driver, AbstractPageUI.FUND_TRANSFER_LINK);
+		clickToElement(driver, AbstractPageUI.FUND_TRANSFER_LINK);
+//		return new FundTransferPageObject(driver);
+		return PageFactoryManager.getFundTransferPage(driver);
+	}
+	
+	public LoginPageObject clickToLogoutLink(WebDriver driver) {
+		waitForControlVisible(driver, AbstractPageUI.LOGOUT_LINK);
+		clickToElement(driver, AbstractPageUI.LOGOUT_LINK);
+		acceptAlert(driver);
+//		return new LoginPageObject(driver);
+		return PageFactoryManager.getLogInPage(driver);
 	}
 }

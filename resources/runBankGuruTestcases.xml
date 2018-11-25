@@ -4,10 +4,10 @@
 		<parameter name="browser" value="firefox" />
 		<classes>
 			<class
-				name="com.bankguru.account.Level_03_RegisterLoginLogout_PageObject" />
+				name="com.bankguru.account.Level_04_RegisterLoginLogout_ManagePage" />
 		</classes>
 	</test>
-	<test name="Run on Chrome">
+	<!-- <test name="Run on Chrome">
 		<parameter name="browser" value="chrome" />
 		<classes>
 			<class
@@ -20,5 +20,5 @@
 			<class
 				name="com.bankguru.account.Level_03_RegisterLoginLogout_PageObject" />
 		</classes>
-	</test>
+	</test> -->
 </suite>
