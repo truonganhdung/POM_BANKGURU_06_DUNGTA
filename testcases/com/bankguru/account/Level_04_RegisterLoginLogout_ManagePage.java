@@ -23,55 +23,40 @@ public class Level_04_RegisterLoginLogout_ManagePage extends AbstractTest {
 	@BeforeClass
 	public void beforeClass(String browserName) {
 		driverTestCase = openMultiBrowser(browserName);
-
 		loginPage = PageFactoryManager.getLogInPage(driverTestCase);
-
 		email = "automations" + randomNumber() + "@gmail.com";
 	}
-
 	@Test
 	public void TC_01_RegisterToSystem() {
 		loginURL = loginPage.getLoginPageUrl();
 		registerPage = loginPage.clickToHereLink();
-
 		registerPage.inputToEmailTextBox(email);
 		registerPage.clickToSubmitButton();
-
 		userID = registerPage.getUserIDText();
 		password = registerPage.getPasswordText();
 	}
-
 	@Test
 	public void TC_02_LoginToSystem() {
 		loginPage = registerPage.openLoginPageByUrl(loginURL);
-
 		loginPage.inputToUserIDTextbox(userID);
 		loginPage.inputToPasswordTextbox(password);
 		homePage = loginPage.clickToLoginButton();
-
 		Assert.assertTrue(homePage.isHomePageDisplay());
 	}
 
 	@Test
 	public void TC_03_OpenMultiPage() {
 		newCustomerPage = homePage.openNewCustomerPage(driverTestCase);
-
 		editCustomerPage = newCustomerPage.openEditCustomerPage(driverTestCase);
-
 		depositPage = editCustomerPage.openDepositPage(driverTestCase);
-
 		fundTransferPage = depositPage.openFundTransferPage(driverTestCase);
-
 		depositPage = fundTransferPage.openDepositPage(driverTestCase);
-
 		homePage = depositPage.openHomePage(driverTestCase);
-
 	}
 
 	@Test
 	public void TC_04_LogoutToSystem() {
 		loginPage = homePage.clickToLogoutLink(driverTestCase);
-
 		Assert.assertTrue(loginPage.isLoginPageDisplayed());
 	}
 

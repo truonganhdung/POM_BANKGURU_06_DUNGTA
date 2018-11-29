@@ -17,5 +17,4 @@ public class FundTransferPageObject extends AbstractPage {
 		clickToElement(driverHomePageObject, FundTransferPageUI.LOGOUT_LINK);
 		acceptAlert(driverHomePageObject);
 	}
-
 }
