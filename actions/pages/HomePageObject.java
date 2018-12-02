@@ -3,7 +3,6 @@ package pages;
 import org.openqa.selenium.WebDriver;
 
 import bankguru.HomePageUI;
-import bankguru.LoginPageUI;
 import commons.AbstractPage;
 
 public class HomePageObject extends AbstractPage {
