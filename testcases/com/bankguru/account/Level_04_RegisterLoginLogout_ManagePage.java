@@ -29,6 +29,7 @@ public class Level_04_RegisterLoginLogout_ManagePage extends AbstractTest {
 	@Test
 	public void TC_01_RegisterToSystem() {
 		loginURL = loginPage.getLoginPageUrl();
+		
 		registerPage = loginPage.clickToHereLink();
 		registerPage.inputToEmailTextBox(email);
 		registerPage.clickToSubmitButton();
@@ -42,6 +43,8 @@ public class Level_04_RegisterLoginLogout_ManagePage extends AbstractTest {
 		loginPage.inputToPasswordTextbox(password);
 		homePage = loginPage.clickToLoginButton();
 		Assert.assertTrue(homePage.isHomePageDisplay());
+		
+		Assert.assertTrue(loginPage.isLoginPageNotDisplayed());
 	}
 
 	@Test
@@ -58,6 +61,8 @@ public class Level_04_RegisterLoginLogout_ManagePage extends AbstractTest {
 	public void TC_04_LogoutToSystem() {
 		loginPage = homePage.clickToLogoutLink(driverTestCase);
 		Assert.assertTrue(loginPage.isLoginPageDisplayed());
+		
+		Assert.assertTrue(homePage.isHomePageNotDisplayed());
 	}
 
 	@AfterClass

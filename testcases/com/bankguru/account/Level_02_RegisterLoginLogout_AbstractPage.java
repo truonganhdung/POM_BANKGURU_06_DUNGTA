@@ -47,8 +47,8 @@ public class Level_02_RegisterLoginLogout_AbstractPage {
 		abstractPage.sendkeyToElement(driver, "//input[@name='password']", password);
 		abstractPage.clickToElement(driver, "//input[@name='btnLogin']");
 
-		abstractPage.isControlDisplay(driver, "//marquee[text()=\"Welcome To Manager's Page of Guru99 Bank\"]");
-		abstractPage.isControlDisplay(driver, "//td[contains(text(),'Manger Id : " + userID + "')]");
+		abstractPage.isControlDisplayed(driver, "//marquee[text()=\"Welcome To Manager's Page of Guru99 Bank\"]");
+		abstractPage.isControlDisplayed(driver, "//td[contains(text(),'Manger Id : " + userID + "')]");
 		Thread.sleep(1000);
 	}
 

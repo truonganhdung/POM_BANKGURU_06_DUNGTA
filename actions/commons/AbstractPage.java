@@ -4,6 +4,7 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -27,12 +28,6 @@ import pages.LoginPageObject;
 import pages.NewCustomerPageObject;
 
 public class AbstractPage {
-	private Actions action;
-	private String root = System.getProperty("user.dir");
-
-	private WebDriverWait wait;
-	private int longTimeOut = 20;
-
 	public void openAnyUrl(WebDriver driver, String url) {
 		driver.get(url);
 		driver.manage().timeouts().implicitlyWait(longTimeOut, TimeUnit.SECONDS);
@@ -82,8 +77,19 @@ public class AbstractPage {
 	public void clickToElement(WebDriver driver, String xpathExpression) {
 		driver.findElement(By.xpath(xpathExpression)).click();
 	}
+	public void clickToElement(WebDriver driver, String xpathExpression, String... values) {
+		xpathExpression = String.format(xpathExpression, (Object[]) values);
+
+		driver.findElement(By.xpath(xpathExpression)).click();
+	}
 
 	public void sendkeyToElement(WebDriver driver, String xpathExpression, String value) {
+		driver.findElement(By.xpath(xpathExpression)).clear();
+		driver.findElement(By.xpath(xpathExpression)).sendKeys(value);
+	}
+	public void sendkeyToElement(WebDriver driver, String xpathExpression, String value, String... values) {
+		xpathExpression = String.format(xpathExpression, (Object[]) values);
+		
 		driver.findElement(By.xpath(xpathExpression)).clear();
 		driver.findElement(By.xpath(xpathExpression)).sendKeys(value);
 	}
@@ -137,6 +143,11 @@ public class AbstractPage {
 	public String getTextElement(WebDriver driver, String xpathExpression) {
 		return driver.findElement(By.xpath(xpathExpression)).getText();
 	}
+	public String getTextElement(WebDriver driver, String xpathExpression, String... values) {
+		xpathExpression = String.format(xpathExpression, (Object[]) values);
+		
+		return driver.findElement(By.xpath(xpathExpression)).getText();
+	}
 
 	public int countElementNumber(WebDriver driver, String xpathExpression) {
 		List<WebElement> list = driver.findElements(By.xpath(xpathExpression));
@@ -157,8 +168,53 @@ public class AbstractPage {
 		}
 	}
 
-	public boolean isControlDisplay(WebDriver driver, String xpathExpression) {
+	public boolean isControlDisplayed(WebDriver driver, String xpathExpression) {
 		return driver.findElement(By.xpath(xpathExpression)).isDisplayed();
+	}
+	public boolean isControlDisplayed(WebDriver driver, String xpathExpression, String... values) {
+		xpathExpression = String.format(xpathExpression, (Object[]) values);
+		
+		return driver.findElement(By.xpath(xpathExpression)).isDisplayed();
+	}
+
+	public boolean isControlNotDisplayed(WebDriver driver, String xpathExpression) {
+		Date date = new Date();
+		overrideGlobalTimeout(driver, shortTimeOut);
+
+		List<WebElement> elements = driver.findElements(By.xpath(xpathExpression));
+		if (elements.size() == 0) {
+			date = new Date();
+			overrideGlobalTimeout(driver, longTimeOut);
+			
+			return true;
+		} else {
+			date = new Date();
+			overrideGlobalTimeout(driver, longTimeOut);
+			
+			return false;
+		}
+	}
+	public boolean isControlNotDisplayed(WebDriver driver, String xpathExpression, String... values) {
+		Date date = new Date();
+		overrideGlobalTimeout(driver, shortTimeOut);
+
+		xpathExpression = String.format(xpathExpression, (Object[]) values);
+		List<WebElement> elements = driver.findElements(By.xpath(xpathExpression));
+		if (elements.size() == 0) {
+			date = new Date();
+			overrideGlobalTimeout(driver, longTimeOut);
+			
+			return true;
+		} else {
+			date = new Date();
+			overrideGlobalTimeout(driver, longTimeOut);
+			
+			return false;
+		}
+	}
+
+	public void overrideGlobalTimeout(WebDriver driver, long timeOut) {
+		driver.manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
 	}
 
 	public boolean isControlSelected(WebDriver driver, String xpathExpression) {
@@ -312,6 +368,18 @@ public class AbstractPage {
 	public Object clickToElementByJS(WebDriver driver, String xpathExpression) {
 		try {
 			WebElement element = driver.findElement(By.xpath(xpathExpression));
+			
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			return js.executeScript("arguments[0].click();", element);
+		} catch (Exception e) {
+			e.getMessage();
+			return null;
+		}
+	}
+	public Object clickToElementByJS(WebDriver driver, String xpathExpression, String... values) {
+		try {
+			xpathExpression = String.format(xpathExpression, (Object[]) values);
+			WebElement element = driver.findElement(By.xpath(xpathExpression));
 
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			return js.executeScript("arguments[0].click();", element);
@@ -355,6 +423,18 @@ public class AbstractPage {
 
 	public Object scrollToElement(WebDriver driver, String xpathExpression) {
 		try {
+			WebElement element = driver.findElement(By.xpath(xpathExpression));
+			
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			return js.executeScript("arguments[0].srollIntoView(true);", element);
+		} catch (Exception e) {
+			e.getMessage();
+			return null;
+		}
+	}
+	public Object scrollToElement(WebDriver driver, String xpathExpression, String... values) {
+		try {
+			xpathExpression = String.format(xpathExpression, (Object[]) values);
 			WebElement element = driver.findElement(By.xpath(xpathExpression));
 
 			JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -414,77 +494,96 @@ public class AbstractPage {
 	public void waitForControlPrecense(WebDriver driver, String xpathExpression) {
 		By by = By.xpath(xpathExpression);
 
-		wait = new WebDriverWait(driver, longTimeOut);
+		WebDriverWait wait = new WebDriverWait(driver, longTimeOut);
 		wait.until(ExpectedConditions.presenceOfElementLocated(by));
 	}
 
 	public void waitForControlVisible(WebDriver driver, String xpathExpression) {
 		By by = By.xpath(xpathExpression);
 
-		wait = new WebDriverWait(driver, longTimeOut);
+		WebDriverWait wait = new WebDriverWait(driver, longTimeOut);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+	}
+	public void waitForControlVisible(WebDriver driver, String xpathExpression, String... values) {
+		xpathExpression = String.format(xpathExpression, (Object[]) values);
+		By by = By.xpath(xpathExpression);
+
+		WebDriverWait wait = new WebDriverWait(driver, longTimeOut);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(by));
 	}
 
-	public void waitForControlNotVisible(WebDriver driver, String xpathExpression) {
+	public void waitForControlInvisible(WebDriver driver, String xpathExpression) {
 		By by = By.xpath(xpathExpression);
-
-		wait = new WebDriverWait(driver, longTimeOut);
+		
+		WebDriverWait wait = new WebDriverWait(driver, longTimeOut);
+		overrideGlobalTimeout(driver, shortTimeOut);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
+		overrideGlobalTimeout(driver, longTimeOut);
+	}
+	public void waitForControlInvisible(WebDriver driver, String xpathExpression, String... values) {
+		xpathExpression = String.format(xpathExpression, (Object[]) values);
+		By by = By.xpath(xpathExpression);
+		
+		WebDriverWait wait = new WebDriverWait(driver, longTimeOut);
+		overrideGlobalTimeout(driver, shortTimeOut);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
+		overrideGlobalTimeout(driver, longTimeOut);
 	}
 
 	public void waitForControlClickable(WebDriver driver, String xpathExpression) {
 		By by = By.xpath(xpathExpression);
 
-		wait = new WebDriverWait(driver, longTimeOut);
+		WebDriverWait wait = new WebDriverWait(driver, longTimeOut);
 		wait.until(ExpectedConditions.elementToBeClickable(by));
 	}
 
 	public void waitForAlertPresence(WebDriver driver) {
-		wait = new WebDriverWait(driver, longTimeOut);
+		WebDriverWait wait = new WebDriverWait(driver, longTimeOut);
 		wait.until(ExpectedConditions.alertIsPresent());
 	}
 
 	/*** Open Dynamic Pages ***/
 	public HomePageObject openHomePage(WebDriver driver) {
-		waitForControlVisible(driver, AbstractPageUI.HOME_PAGE_LINK);
-		clickToElement(driver, AbstractPageUI.HOME_PAGE_LINK);
-//		return new HomePageObject(driver);
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Manager");
+		clickToElement(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Manager");
 		return PageFactoryManager.getHomePage(driver);
 	}
-	
+
 	public NewCustomerPageObject openNewCustomerPage(WebDriver driver) {
-		waitForControlVisible(driver, AbstractPageUI.NEW_CUSTOMER_LINK);
-		clickToElement(driver, AbstractPageUI.NEW_CUSTOMER_LINK);
-//		return new NewCustomerPageObject(driver);
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "New Customer");
+		clickToElement(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "New Customer");
+		// return new NewCustomerPageObject(driver);
 		return PageFactoryManager.getNewCustomerPage(driver);
 	}
-	
+
 	public EditCustomerPageObject openEditCustomerPage(WebDriver driver) {
-		waitForControlVisible(driver, AbstractPageUI.EDIT_CUSTOMER_LINK);
-		clickToElement(driver, AbstractPageUI.EDIT_CUSTOMER_LINK);
-//		return new EditCustomerPageObject(driver);
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Edit Customer");
+		clickToElement(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Edit Customer");
 		return PageFactoryManager.getEditCustomerPage(driver);
 	}
-	
+
 	public DepositPageObject openDepositPage(WebDriver driver) {
-		waitForControlVisible(driver, AbstractPageUI.DEPOSIT_LINK);
-		clickToElement(driver, AbstractPageUI.DEPOSIT_LINK);
-//		return new DepositPageObject(driver);
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Deposit");
+		clickToElement(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Deposit");
 		return PageFactoryManager.getDepositPage(driver);
 	}
-	
+
 	public FundTransferPageObject openFundTransferPage(WebDriver driver) {
-		waitForControlVisible(driver, AbstractPageUI.FUND_TRANSFER_LINK);
-		clickToElement(driver, AbstractPageUI.FUND_TRANSFER_LINK);
-//		return new FundTransferPageObject(driver);
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Fund Transfer");
+		clickToElement(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Fund Transfer");
 		return PageFactoryManager.getFundTransferPage(driver);
 	}
-	
+
 	public LoginPageObject clickToLogoutLink(WebDriver driver) {
-		waitForControlVisible(driver, AbstractPageUI.LOGOUT_LINK);
-		clickToElement(driver, AbstractPageUI.LOGOUT_LINK);
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Log out");
+		clickToElement(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Log out");
 		acceptAlert(driver);
-//		return new LoginPageObject(driver);
 		return PageFactoryManager.getLogInPage(driver);
 	}
+
+	private String root = System.getProperty("user.dir");
+
+	private Actions action;
+	private int longTimeOut = 20;
+	private int shortTimeOut = 3;
 }

@@ -43,6 +43,11 @@ public class LoginPageObject extends AbstractPage {
 	
 	public boolean isLoginPageDisplayed() {
 		waitForControlVisible(driverLoginPageObject, LoginPageUI.LOGIN_PAGE_FORM);
-		return isControlDisplay(driverLoginPageObject, LoginPageUI.LOGIN_PAGE_FORM);
+		return isControlDisplayed(driverLoginPageObject, LoginPageUI.LOGIN_PAGE_FORM);
+	}
+	
+	public boolean isLoginPageNotDisplayed() {
+		waitForControlInvisible(driverLoginPageObject, LoginPageUI.LOGIN_PAGE_FORM);
+		return isControlNotDisplayed(driverLoginPageObject, LoginPageUI.LOGIN_PAGE_FORM);
 	}
 }
