@@ -5,10 +5,10 @@ import org.openqa.selenium.WebDriver;
 import commons.AbstractPage;
 
 public class NewCustomerPageObject extends AbstractPage {
-	WebDriver driverHomePageObject;
+	WebDriver driver;
 
 	public NewCustomerPageObject(WebDriver driver) {
-		this.driverHomePageObject = driver;
+		this.driver = driver;
 	}
 
 }
