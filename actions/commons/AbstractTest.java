@@ -3,16 +3,26 @@ package commons;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.logging.Log;
+import org.junit.Assert;
+import org.openqa.jetty.log.LogFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.testng.Reporter;
+import commons.VerificationFailures;
 
 public class AbstractTest {
 	WebDriver driverAbstractTest;
+	protected final Log log;
+	
+	protected AbstractTest() {
+		log = LogFactory.getLog(getClass());
+	}
 
-	public WebDriver openMultiBrowser(String browserName) {
+ 	public WebDriver openMultiBrowser(String browserName) {
 		if (browserName.equals("firefox")) {
 			driverAbstractTest = new FirefoxDriver();
 		} else if (browserName.equals("chrome")) {
@@ -81,5 +91,59 @@ public class AbstractTest {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+	}
+
+	protected boolean verifyTrue(boolean condition) {
+		return checkPassed(condition);
+	}
+
+	protected boolean verifyFalse(boolean condition) {
+		return checkFailed(condition);
+	}
+
+	protected boolean verifyEquals(Object actual, Object expected) {
+		return checkEquals(actual, expected);
+	}
+
+	private boolean checkPassed(boolean condition) {
+		boolean pass = true;
+		
+		try {
+			if (condition == true)
+				Assert.assertTrue(condition);
+		}catch (Throwable e){
+			pass = false;
+			
+			VerificationFailures().addFailureForTest(Reporter.getCurrentTestResult(),e);
+			Reporter.getCurrentTestResult().setThrowable(e);
+		}
+		return pass;
+	}
+	
+	private boolean checkFailed(boolean condition) {
+		boolean pass = true;
+		
+		try {
+			if (condition == true)
+				Assert.assertFalse(condition);
+		}catch (Throwable e){
+			pass = false;
+			VerificationFailures().addFailureForTest(Reporter.getCurrentTestResult(),e);
+			Reporter.getCurrentTestResult().setThrowable(e);
+		}
+		return pass;
+	}
+	
+	private boolean checkEquals(Object actual, Object expected) {
+		boolean pass = true;
+		
+		try {
+			Assert.assertEquals(actual, expected);
+		}catch (Throwable e){
+			pass = false;
+			VerificationFailures().addFailureForTest(Reporter.getCurrentTestResult(),e);
+			Reporter.getCurrentTestResult().setThrowable(e);
+		}
+		return pass;
 	}
 }
