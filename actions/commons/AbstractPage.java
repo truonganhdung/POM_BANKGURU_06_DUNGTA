@@ -541,6 +541,13 @@ public class AbstractPage {
 		WebDriverWait wait = new WebDriverWait(driver, longTimeOut);
 		wait.until(ExpectedConditions.alertIsPresent());
 	}
+	
+	public void pressTab(WebDriver driver) {
+		action = new Actions(driver);
+		
+		action.keyDown(Keys.TAB).perform();
+		action.keyUp(Keys.TAB).perform();
+	}
 
 	/*** Open Dynamic Pages ***/
 	public HomePageObject openHomePage(WebDriver driver) {

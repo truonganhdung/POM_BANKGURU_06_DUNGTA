@@ -26,6 +26,7 @@ public class Level_04_RegisterLoginLogout_ManagePage extends AbstractTest {
 		loginPage = PageFactoryManager.getLogInPage(driverTestCase);
 		email = "automations" + randomNumber() + "@gmail.com";
 	}
+	
 	@Test
 	public void TC_01_RegisterToSystem() {
 		loginURL = loginPage.getLoginPageUrl();
@@ -36,6 +37,7 @@ public class Level_04_RegisterLoginLogout_ManagePage extends AbstractTest {
 		userID = registerPage.getUserIDText();
 		password = registerPage.getPasswordText();
 	}
+	
 	@Test
 	public void TC_02_LoginToSystem() {
 		loginPage = registerPage.openLoginPageByUrl(loginURL);
@@ -71,7 +73,7 @@ public class Level_04_RegisterLoginLogout_ManagePage extends AbstractTest {
 	}
 
 	WebDriver driverTestCase;
-	String email, userID, password, loginURL;
+	global String email, userID, password, loginURL;
 
 	private LoginPageObject loginPage;
 	private HomePageObject homePage;

@@ -5,20 +5,13 @@
 		<classes>
 			<class
 				name="com.bankguru.account.Level_04_RegisterLoginLogout_ManagePage" />
+			<class
+				name="com.bankguru.account.NewCustomer" />
 		</classes>
 	</test>
-	<!-- <test name="Run on Chrome">
-		<parameter name="browser" value="chrome" />
-		<classes>
-			<class
-				name="com.bankguru.account.Level_03_RegisterLoginLogout_PageObject" />
-		</classes>
-	</test>
-	<test name="Run on Chrome headless">
-		<parameter name="browser" value="chromeheadless" />
-		<classes>
-			<class
-				name="com.bankguru.account.Level_03_RegisterLoginLogout_PageObject" />
-		</classes>
-	</test> -->
+	<!-- <test name="Run on Chrome"> <parameter name="browser" value="chrome" 
+		/> <classes> <class name="com.bankguru.account.Level_03_RegisterLoginLogout_PageObject" 
+		/> </classes> </test> <test name="Run on Chrome headless"> <parameter name="browser" 
+		value="chromeheadless" /> <classes> <class name="com.bankguru.account.Level_03_RegisterLoginLogout_PageObject" 
+		/> </classes> </test> -->
 </suite>
