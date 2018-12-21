@@ -1,17 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<suite name="Bank GURU" parallel="false">
+<suite name="Bank GURU" parallel="false" thread-count="3">
+	<listeners>
+		<listener class-name="org.uncommons.reportng.HTMLReporter" />
+		<listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
+		<listener class-name="commons.ExtentReportListener" />
+	</listeners>
+
 	<test name="Run on Firefox">
 		<parameter name="browser" value="firefox" />
 		<classes>
-			<class
-				name="com.bankguru.account.Level_04_RegisterLoginLogout_ManagePage" />
-			<class
-				name="com.bankguru.account.NewCustomer" />
+			<class name="com.bankguru.common.Common_01_CreateUser" />
+			<class name="com.bankguru.payment.Payment_Test_Module" />
 		</classes>
 	</test>
-	<!-- <test name="Run on Chrome"> <parameter name="browser" value="chrome" 
-		/> <classes> <class name="com.bankguru.account.Level_03_RegisterLoginLogout_PageObject" 
-		/> </classes> </test> <test name="Run on Chrome headless"> <parameter name="browser" 
-		value="chromeheadless" /> <classes> <class name="com.bankguru.account.Level_03_RegisterLoginLogout_PageObject" 
-		/> </classes> </test> -->
+	
+	<!-- <test name="Run on Chrome">
+		<parameter name="browser" value="chrome" />
+		<classes>
+			<class
+				name="com.bankguru.account.Level_03_RegisterLoginLogout_PageObject" />
+		</classes>
+	</test>
+	
+	<test name="Run on Chrome headless">
+		<parameter name="browser" value="chromeheadless" />
+		<classes>
+			<class
+				name="com.bankguru.account.Level_03_RegisterLoginLogout_PageObject" />
+		</classes>
+	</test> -->
 </suite>

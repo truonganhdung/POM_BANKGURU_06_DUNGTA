@@ -7,47 +7,48 @@ import commons.AbstractPage;
 import commons.PageFactoryManager;
 
 public class LoginPageObject extends AbstractPage {
-	private WebDriver driverLoginPageObject;
+	private WebDriver driver;
 
 	public LoginPageObject(WebDriver driverTestCase) {
-		this.driverLoginPageObject = driverTestCase;
+		this.driver = driverTestCase;
 	}
 
 	public String getLoginPageUrl() {
-		return getCurrentURL(driverLoginPageObject);
+		return getCurrentURL(driver);
 	}
 
 	public void inputToUserIDTextbox(String email) {
-		waitForControlVisible(driverLoginPageObject, LoginPageUI.USER_ID_TEXTBOX);
-		sendkeyToElement(driverLoginPageObject, LoginPageUI.USER_ID_TEXTBOX, email);
+		waitForControlVisible(driver, LoginPageUI.USER_ID_TEXTBOX);
+		sendkeyToElement(driver, LoginPageUI.USER_ID_TEXTBOX, email);
 	}
 
 	public void inputToPasswordTextbox(String password) {
-		waitForControlVisible(driverLoginPageObject, LoginPageUI.PASSWORD_TEXTBOX);
-		sendkeyToElement(driverLoginPageObject, LoginPageUI.PASSWORD_TEXTBOX, password);
+		waitForControlVisible(driver, LoginPageUI.PASSWORD_TEXTBOX);
+		sendkeyToElement(driver, LoginPageUI.PASSWORD_TEXTBOX, password);
 	}
 
 	public HomePageObject clickToLoginButton() {
-		waitForControlVisible(driverLoginPageObject, LoginPageUI.SUBMIT_BUTTON);
-		clickToElement(driverLoginPageObject, LoginPageUI.SUBMIT_BUTTON);
+		waitForControlVisible(driver, LoginPageUI.SUBMIT_BUTTON);
+		clickToElement(driver, LoginPageUI.SUBMIT_BUTTON);
 //		return new HomePageObject(driverLoginPageObject);
-		return PageFactoryManager.getHomePage(driverLoginPageObject);
+		return PageFactoryManager.getHomePage(driver);
 	}
 
 	public RegisterPageObject clickToHereLink() {
-		waitForControlVisible(driverLoginPageObject, LoginPageUI.HERE_LINK);
-		clickToElement(driverLoginPageObject, LoginPageUI.HERE_LINK);
+		waitForControlVisible(driver, LoginPageUI.HERE_LINK);
+		clickToElement(driver, LoginPageUI.HERE_LINK);
 //		return new RegisterPageObject(driverLoginPageObject);
-		return PageFactoryManager.getResgisterPage(driverLoginPageObject);
+
+		return PageFactoryManager.getResgisterPage(driver);
 	}
 	
 	public boolean isLoginPageDisplayed() {
-		waitForControlVisible(driverLoginPageObject, LoginPageUI.LOGIN_PAGE_FORM);
-		return isControlDisplayed(driverLoginPageObject, LoginPageUI.LOGIN_PAGE_FORM);
+		waitForControlVisible(driver, LoginPageUI.LOGIN_PAGE_FORM);
+		return isControlDisplayed(driver, LoginPageUI.LOGIN_PAGE_FORM);
 	}
 	
 	public boolean isLoginPageNotDisplayed() {
-		waitForControlInvisible(driverLoginPageObject, LoginPageUI.LOGIN_PAGE_FORM);
-		return isControlNotDisplayed(driverLoginPageObject, LoginPageUI.LOGIN_PAGE_FORM);
+		waitForControlInvisible(driver, LoginPageUI.LOGIN_PAGE_FORM);
+		return isControlNotDisplayed(driver, LoginPageUI.LOGIN_PAGE_FORM);
 	}
 }

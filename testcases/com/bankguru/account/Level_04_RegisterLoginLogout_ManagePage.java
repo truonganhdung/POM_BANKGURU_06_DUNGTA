@@ -1,7 +1,6 @@
 package com.bankguru.account;
 
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -18,63 +17,67 @@ import pages.NewCustomerPageObject;
 import pages.RegisterPageObject;
 
 public class Level_04_RegisterLoginLogout_ManagePage extends AbstractTest {
-	
+
 	@Parameters("browser")
 	@BeforeClass
 	public void beforeClass(String browserName) {
-		driverTestCase = openMultiBrowser(browserName);
-		loginPage = PageFactoryManager.getLogInPage(driverTestCase);
+		driver = openMultiBrowser(browserName);
+		loginPage = PageFactoryManager.getLogInPage(driver);
 		email = "automations" + randomNumber() + "@gmail.com";
 	}
-	
+
 	@Test
 	public void TC_01_RegisterToSystem() {
+		log.info("Account - TC_01: Register to System");
 		loginURL = loginPage.getLoginPageUrl();
-		
+
 		registerPage = loginPage.clickToHereLink();
 		registerPage.inputToEmailTextBox(email);
 		registerPage.clickToSubmitButton();
 		userID = registerPage.getUserIDText();
 		password = registerPage.getPasswordText();
 	}
-	
+
 	@Test
 	public void TC_02_LoginToSystem() {
 		loginPage = registerPage.openLoginPageByUrl(loginURL);
+		verifyTrue(loginPage.isLoginPageDisplayed());
+
 		loginPage.inputToUserIDTextbox(userID);
 		loginPage.inputToPasswordTextbox(password);
 		homePage = loginPage.clickToLoginButton();
-		Assert.assertTrue(homePage.isHomePageDisplay());
-		
-		Assert.assertTrue(loginPage.isLoginPageNotDisplayed());
+		verifyTrue(homePage.isHomePageDisplay());
+
+		verifyFalse(loginPage.isLoginPageNotDisplayed());
 	}
 
 	@Test
 	public void TC_03_OpenMultiPage() {
-		newCustomerPage = homePage.openNewCustomerPage(driverTestCase);
-		editCustomerPage = newCustomerPage.openEditCustomerPage(driverTestCase);
-		depositPage = editCustomerPage.openDepositPage(driverTestCase);
-		fundTransferPage = depositPage.openFundTransferPage(driverTestCase);
-		depositPage = fundTransferPage.openDepositPage(driverTestCase);
-		homePage = depositPage.openHomePage(driverTestCase);
+		newCustomerPage = homePage.openNewCustomerPage(driver);
+		editCustomerPage = newCustomerPage.openEditCustomerPage(driver);
+		depositPage = editCustomerPage.openDepositPage(driver);
+		fundTransferPage = depositPage.openFundTransferPage(driver);
+		depositPage = fundTransferPage.openDepositPage(driver);
+		homePage = depositPage.openHomePage(driver);
 	}
 
 	@Test
 	public void TC_04_LogoutToSystem() {
-		loginPage = homePage.clickToLogoutLink(driverTestCase);
-		Assert.assertTrue(loginPage.isLoginPageDisplayed());
-		
-		Assert.assertTrue(homePage.isHomePageNotDisplayed());
+		loginPage = homePage.clickToLogoutLink(driver);
+		verifyTrue(loginPage.isLoginPageDisplayed());
+
+		verifyFalse(homePage.isHomePageNotDisplayed());
 	}
 
 	@AfterClass
 	public void afterClass() {
-		closeBrowser(driverTestCase);
+		closeBrowser(driver);
 	}
 
-	WebDriver driverTestCase;
-	global String email, userID, password, loginURL;
+	WebDriver driver;
+	public static String userID, password;
 
+	private String email, loginURL;
 	private LoginPageObject loginPage;
 	private HomePageObject homePage;
 	private RegisterPageObject registerPage;

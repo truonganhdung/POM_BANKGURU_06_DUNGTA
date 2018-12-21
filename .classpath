@@ -23,12 +23,12 @@
 	<classpathentry kind="lib" path="lib/junit-4.10.jar"/>
 	<classpathentry kind="lib" path="lib/log4j-1.2.16.jar"/>
 	<classpathentry kind="lib" path="lib/reportng-1.1.4.jar"/>
-	<classpathentry kind="lib" path="lib/selenium-server-standalone-2.53.1.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-api-1.7.24.jar"/>
 	<classpathentry kind="lib" path="lib/snakeyaml-1.15.jar"/>
 	<classpathentry kind="lib" path="lib/sqlite-jdbc-3.8.11.1.jar"/>
 	<classpathentry kind="lib" path="lib/testng-6.9.9.jar"/>
 	<classpathentry kind="lib" path="lib/velocity-dep-1.5.jar"/>
 	<classpathentry kind="lib" path="lib/webdrivermanager-2.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/selenium-server-standalone-3.14.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

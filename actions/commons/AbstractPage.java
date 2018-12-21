@@ -76,6 +76,10 @@ public class AbstractPage {
 
 	public void clickToElement(WebDriver driver, String xpathExpression) {
 		driver.findElement(By.xpath(xpathExpression)).click();
+		
+		if(driver.toString().toLowerCase().contains("internetexplorer")) {
+			staticSleep(5);
+		}
 	}
 	public void clickToElement(WebDriver driver, String xpathExpression, String... values) {
 		xpathExpression = String.format(xpathExpression, (Object[]) values);
@@ -178,7 +182,6 @@ public class AbstractPage {
 	}
 
 	public boolean isControlNotDisplayed(WebDriver driver, String xpathExpression) {
-		Date date = new Date();
 		overrideGlobalTimeout(driver, shortTimeOut);
 
 		List<WebElement> elements = driver.findElements(By.xpath(xpathExpression));
@@ -195,7 +198,6 @@ public class AbstractPage {
 		}
 	}
 	public boolean isControlNotDisplayed(WebDriver driver, String xpathExpression, String... values) {
-		Date date = new Date();
 		overrideGlobalTimeout(driver, shortTimeOut);
 
 		xpathExpression = String.format(xpathExpression, (Object[]) values);
@@ -549,6 +551,14 @@ public class AbstractPage {
 		action.keyUp(Keys.TAB).perform();
 	}
 
+	public void staticSleep(long timeout) {
+		try {
+			Thread.sleep(timeout * 1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/*** Open Dynamic Pages ***/
 	public HomePageObject openHomePage(WebDriver driver) {
 		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Manager");
@@ -588,9 +598,10 @@ public class AbstractPage {
 		return PageFactoryManager.getLogInPage(driver);
 	}
 
-	private String root = System.getProperty("user.dir");
-
 	private Actions action;
 	private int longTimeOut = 20;
 	private int shortTimeOut = 3;
+	private Date date;
+	
+	private String root = System.getProperty("user.dir");
 }
