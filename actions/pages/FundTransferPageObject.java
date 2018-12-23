@@ -6,15 +6,21 @@ import bankguru.FundTransferPageUI;
 import commons.AbstractPage;
 
 public class FundTransferPageObject extends AbstractPage {
-	WebDriver driverHomePageObject;
+	WebDriver driver;
 
 	public FundTransferPageObject(WebDriver driver) {
-		this.driverHomePageObject = driver;
+		this.driver = driver;
 	}
 
 	public void clickToLogoutLink() {
-		waitForControlVisible(driverHomePageObject, FundTransferPageUI.LOGOUT_LINK);
-		clickToElement(driverHomePageObject, FundTransferPageUI.LOGOUT_LINK);
-		acceptAlert(driverHomePageObject);
+		waitForControlVisible(driver, FundTransferPageUI.LOGOUT_LINK);
+		clickToElement(driver, FundTransferPageUI.LOGOUT_LINK);
+		acceptAlert(driver);
 	}
+
+	public String getAmount() {
+		waitForControlVisible(driver, FundTransferPageUI.VERIFY_DYNAMIC, "Amount");
+		return getTextElement(driver, FundTransferPageUI.VERIFY_DYNAMIC, "Amount");
+	}
+
 }

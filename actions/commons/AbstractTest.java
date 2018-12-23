@@ -20,7 +20,7 @@ import org.testng.Reporter;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class AbstractTest {
+public class AbstractTest extends AbstractPage{
 	protected AbstractTest() {
 		log = LogFactory.getLog(getClass());
 	}
@@ -43,6 +43,7 @@ public class AbstractTest {
 			profile.setPreference("browser.download.downloadDir", "D:\\0nlineAutoTesting\\Project\\Downloads");
 			profile.setPreference("browser.download.defaultFolder", "D:\\0nlineAutoTesting\\Project\\Downloads");
 			profile.setPreference("browser.helperApps.neverAsk.saveToDisk", "text/anytext, text/plain, text/html, applocation/plain");
+			profile.setPreference("browser.private.browsing.autostart", true);
 			capabilities = DesiredCapabilities.firefox();
 			capabilities.setCapability(FirefoxDriver.PROFILE, profile);
 
@@ -116,6 +117,8 @@ public class AbstractTest {
 
 	protected void closeBrowser(WebDriver driver) {
 		try {
+			staticSleep(1);
+			
 			// IE-11
 			driver.manage().deleteAllCookies();
 

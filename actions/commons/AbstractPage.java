@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -20,18 +21,27 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import bankguru.AbstractPageUI;
+import pages.BalanceEnquiryPageObject;
+import pages.DeleteAccountPageObject;
+import pages.DeleteCustomerPageObject;
 import pages.DepositPageObject;
 import pages.EditCustomerPageObject;
 import pages.FundTransferPageObject;
 import pages.HomePageObject;
 import pages.LoginPageObject;
+import pages.NewAccountPageObject;
 import pages.NewCustomerPageObject;
+import pages.WithdrawalPageObject;
 
 public class AbstractPage {
 	public void openAnyUrl(WebDriver driver, String url) {
 		driver.get(url);
 		driver.manage().timeouts().implicitlyWait(longTimeOut, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
+
+		if (driver.toString().toLowerCase().contains("internetexplorer")) {
+			staticSleep(5);
+		}
 	}
 
 	public String getPageTitle(WebDriver driver) {
@@ -62,6 +72,14 @@ public class AbstractPage {
 		driver.switchTo().alert().accept();
 	}
 
+	public void acceptAlert(WebDriver driver, String expected) {
+		Alert alert = driver.switchTo().alert();
+
+		AbstractTest abstractTest = new AbstractTest();
+		abstractTest.verifyEquals(alert.getText(), expected);
+		alert.accept();
+	}
+
 	public void cancelAlert(WebDriver driver) {
 		driver.switchTo().alert().dismiss();
 	}
@@ -76,11 +94,12 @@ public class AbstractPage {
 
 	public void clickToElement(WebDriver driver, String xpathExpression) {
 		driver.findElement(By.xpath(xpathExpression)).click();
-		
-		if(driver.toString().toLowerCase().contains("internetexplorer")) {
+
+		if (driver.toString().toLowerCase().contains("internetexplorer")) {
 			staticSleep(5);
 		}
 	}
+
 	public void clickToElement(WebDriver driver, String xpathExpression, String... values) {
 		xpathExpression = String.format(xpathExpression, (Object[]) values);
 
@@ -91,9 +110,10 @@ public class AbstractPage {
 		driver.findElement(By.xpath(xpathExpression)).clear();
 		driver.findElement(By.xpath(xpathExpression)).sendKeys(value);
 	}
+
 	public void sendkeyToElement(WebDriver driver, String xpathExpression, String value, String... values) {
 		xpathExpression = String.format(xpathExpression, (Object[]) values);
-		
+
 		driver.findElement(By.xpath(xpathExpression)).clear();
 		driver.findElement(By.xpath(xpathExpression)).sendKeys(value);
 	}
@@ -147,9 +167,10 @@ public class AbstractPage {
 	public String getTextElement(WebDriver driver, String xpathExpression) {
 		return driver.findElement(By.xpath(xpathExpression)).getText();
 	}
+
 	public String getTextElement(WebDriver driver, String xpathExpression, String... values) {
 		xpathExpression = String.format(xpathExpression, (Object[]) values);
-		
+
 		return driver.findElement(By.xpath(xpathExpression)).getText();
 	}
 
@@ -175,9 +196,10 @@ public class AbstractPage {
 	public boolean isControlDisplayed(WebDriver driver, String xpathExpression) {
 		return driver.findElement(By.xpath(xpathExpression)).isDisplayed();
 	}
+
 	public boolean isControlDisplayed(WebDriver driver, String xpathExpression, String... values) {
 		xpathExpression = String.format(xpathExpression, (Object[]) values);
-		
+
 		return driver.findElement(By.xpath(xpathExpression)).isDisplayed();
 	}
 
@@ -188,15 +210,16 @@ public class AbstractPage {
 		if (elements.size() == 0) {
 			date = new Date();
 			overrideGlobalTimeout(driver, longTimeOut);
-			
+
 			return true;
 		} else {
 			date = new Date();
 			overrideGlobalTimeout(driver, longTimeOut);
-			
+
 			return false;
 		}
 	}
+
 	public boolean isControlNotDisplayed(WebDriver driver, String xpathExpression, String... values) {
 		overrideGlobalTimeout(driver, shortTimeOut);
 
@@ -205,12 +228,12 @@ public class AbstractPage {
 		if (elements.size() == 0) {
 			date = new Date();
 			overrideGlobalTimeout(driver, longTimeOut);
-			
+
 			return true;
 		} else {
 			date = new Date();
 			overrideGlobalTimeout(driver, longTimeOut);
-			
+
 			return false;
 		}
 	}
@@ -370,7 +393,7 @@ public class AbstractPage {
 	public Object clickToElementByJS(WebDriver driver, String xpathExpression) {
 		try {
 			WebElement element = driver.findElement(By.xpath(xpathExpression));
-			
+
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			return js.executeScript("arguments[0].click();", element);
 		} catch (Exception e) {
@@ -378,6 +401,7 @@ public class AbstractPage {
 			return null;
 		}
 	}
+
 	public Object clickToElementByJS(WebDriver driver, String xpathExpression, String... values) {
 		try {
 			xpathExpression = String.format(xpathExpression, (Object[]) values);
@@ -426,7 +450,7 @@ public class AbstractPage {
 	public Object scrollToElement(WebDriver driver, String xpathExpression) {
 		try {
 			WebElement element = driver.findElement(By.xpath(xpathExpression));
-			
+
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			return js.executeScript("arguments[0].srollIntoView(true);", element);
 		} catch (Exception e) {
@@ -434,6 +458,7 @@ public class AbstractPage {
 			return null;
 		}
 	}
+
 	public Object scrollToElement(WebDriver driver, String xpathExpression, String... values) {
 		try {
 			xpathExpression = String.format(xpathExpression, (Object[]) values);
@@ -506,6 +531,7 @@ public class AbstractPage {
 		WebDriverWait wait = new WebDriverWait(driver, longTimeOut);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(by));
 	}
+
 	public void waitForControlVisible(WebDriver driver, String xpathExpression, String... values) {
 		xpathExpression = String.format(xpathExpression, (Object[]) values);
 		By by = By.xpath(xpathExpression);
@@ -516,16 +542,17 @@ public class AbstractPage {
 
 	public void waitForControlInvisible(WebDriver driver, String xpathExpression) {
 		By by = By.xpath(xpathExpression);
-		
+
 		WebDriverWait wait = new WebDriverWait(driver, longTimeOut);
 		overrideGlobalTimeout(driver, shortTimeOut);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
 		overrideGlobalTimeout(driver, longTimeOut);
 	}
+
 	public void waitForControlInvisible(WebDriver driver, String xpathExpression, String... values) {
 		xpathExpression = String.format(xpathExpression, (Object[]) values);
 		By by = By.xpath(xpathExpression);
-		
+
 		WebDriverWait wait = new WebDriverWait(driver, longTimeOut);
 		overrideGlobalTimeout(driver, shortTimeOut);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
@@ -543,10 +570,10 @@ public class AbstractPage {
 		WebDriverWait wait = new WebDriverWait(driver, longTimeOut);
 		wait.until(ExpectedConditions.alertIsPresent());
 	}
-	
+
 	public void pressTab(WebDriver driver) {
 		action = new Actions(driver);
-		
+
 		action.keyDown(Keys.TAB).perform();
 		action.keyUp(Keys.TAB).perform();
 	}
@@ -558,42 +585,148 @@ public class AbstractPage {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/*** Open Dynamic Pages ***/
 	public HomePageObject openHomePage(WebDriver driver) {
 		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Manager");
-		clickToElement(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Manager");
+
+		if (driver.toString().toLowerCase().contains("internetexplorer")) {
+			clickToElementByJS(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Manager");
+			staticSleep(5);
+		} else {
+			clickToElement(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Manager");
+		}
+
 		return PageFactoryManager.getHomePage(driver);
 	}
 
 	public NewCustomerPageObject openNewCustomerPage(WebDriver driver) {
 		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "New Customer");
-		clickToElement(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "New Customer");
-		// return new NewCustomerPageObject(driver);
+
+		if (driver.toString().toLowerCase().contains("internetexplorer")) {
+			clickToElementByJS(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "New Customer");
+			staticSleep(5);
+		} else {
+			clickToElement(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "New Customer");
+		}
+
 		return PageFactoryManager.getNewCustomerPage(driver);
 	}
 
 	public EditCustomerPageObject openEditCustomerPage(WebDriver driver) {
 		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Edit Customer");
-		clickToElement(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Edit Customer");
+
+		if (driver.toString().toLowerCase().contains("internetexplorer")) {
+			clickToElementByJS(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Edit Customer");
+			staticSleep(5);
+		} else {
+			clickToElement(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Edit Customer");
+		}
+
 		return PageFactoryManager.getEditCustomerPage(driver);
 	}
 
 	public DepositPageObject openDepositPage(WebDriver driver) {
 		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Deposit");
-		clickToElement(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Deposit");
+
+		if (driver.toString().toLowerCase().contains("internetexplorer")) {
+			clickToElementByJS(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Deposit");
+			staticSleep(5);
+		} else {
+			clickToElement(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Deposit");
+		}
+
 		return PageFactoryManager.getDepositPage(driver);
 	}
 
 	public FundTransferPageObject openFundTransferPage(WebDriver driver) {
 		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Fund Transfer");
-		clickToElement(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Fund Transfer");
+
+		if (driver.toString().toLowerCase().contains("internetexplorer")) {
+			clickToElementByJS(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Fund Transfer");
+			staticSleep(5);
+		} else {
+			clickToElement(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Fund Transfer");
+		}
+
 		return PageFactoryManager.getFundTransferPage(driver);
+	}
+
+	public NewAccountPageObject openNewAccountPage(WebDriver driver) {
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "New Account");
+
+		if (driver.toString().toLowerCase().contains("internetexplorer")) {
+			clickToElementByJS(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "New Account");
+			staticSleep(5);
+		} else {
+			clickToElement(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "New Account");
+		}
+
+		return PageFactoryManager.getNewAccountPage(driver);
+	}
+
+	public WithdrawalPageObject openWithdrawalPage(WebDriver driver) {
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Withdrawal");
+
+		if (driver.toString().toLowerCase().contains("internetexplorer")) {
+			clickToElementByJS(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Withdrawal");
+			staticSleep(5);
+		} else {
+			clickToElement(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Withdrawal");
+		}
+
+		return PageFactoryManager.getWithdrawalPage(driver);
+	}
+
+	public BalanceEnquiryPageObject openBalanceEnquiryPage(WebDriver driver) {
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Balance Enquiry");
+
+		if (driver.toString().toLowerCase().contains("internetexplorer")) {
+			clickToElementByJS(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Balance Enquiry");
+			staticSleep(5);
+		} else {
+			clickToElement(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Balance Enquiry");
+		}
+
+		return PageFactoryManager.getBalanceEnquiryPage(driver);
+	}
+
+	public DeleteAccountPageObject openDeleteAccountPage(WebDriver driver) {
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Delete Account");
+
+		if (driver.toString().toLowerCase().contains("internetexplorer")) {
+			clickToElementByJS(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Delete Account");
+			staticSleep(5);
+		} else {
+			clickToElement(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Delete Account");
+		}
+
+		return PageFactoryManager.getDeleteAccountPage(driver);
+	}
+
+	public DeleteCustomerPageObject openDeleteCustomerPage(WebDriver driver) {
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Delete Customer");
+
+		if (driver.toString().toLowerCase().contains("internetexplorer")) {
+			clickToElementByJS(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Delete Customer");
+			staticSleep(5);
+		} else {
+			clickToElement(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Delete Customer");
+		}
+
+		return PageFactoryManager.getDeleteCustomerPage(driver);
 	}
 
 	public LoginPageObject clickToLogoutLink(WebDriver driver) {
 		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Log out");
-		clickToElement(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Log out");
+
+		if (driver.toString().toLowerCase().contains("internetexplorer")) {
+			clickToElementByJS(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Log out");
+			staticSleep(5);
+		} else {
+			clickToElement(driver, AbstractPageUI.DYNAMIC_PAGE_LINK, "Log out");
+		}
+
 		acceptAlert(driver);
 		return PageFactoryManager.getLogInPage(driver);
 	}
@@ -602,6 +735,6 @@ public class AbstractPage {
 	private int longTimeOut = 20;
 	private int shortTimeOut = 3;
 	private Date date;
-	
+
 	private String root = System.getProperty("user.dir");
 }

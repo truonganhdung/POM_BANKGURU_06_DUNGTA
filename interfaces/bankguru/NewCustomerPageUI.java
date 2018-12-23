@@ -1,8 +1,13 @@
 package bankguru;
 
 public class NewCustomerPageUI {
-//	public static final String DYNAMIC_PAGE_LINK = "//td[text()='Customer Name']/following-sibling::td/input";
-	public static final String DYNAMIC_Textbox = "//td[text()='%s']/following-sibling::td/input";
-	public static final String DYNAMIC_Warning_Message = "//td[text()='%s']/following-sibling::td/label";
+	public static final String DYNAMIC_TEXTBOX = "//td[text()='%s']/following-sibling::td/input";
+	public static final String DYNAMIC_TEXTAREA = "//td[text()='%s']/following-sibling::td/textarea";
+	
+	public static final String SUBMIT_BUTTON = "//input[@name='sub']";
+	
+	public static final String CUSTOMER_ID = "//td[text()='Customer ID']/following-sibling::td";
+	
+	public static final String VERIFY_CREATE_CUSTOMER = "//p[text()='Customer Registered Successfully!!!']";
 	
 }
