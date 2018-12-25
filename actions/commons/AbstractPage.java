@@ -77,6 +77,7 @@ public class AbstractPage {
 
 		AbstractTest abstractTest = new AbstractTest();
 		abstractTest.verifyEquals(alert.getText(), expected);
+
 		alert.accept();
 	}
 
@@ -116,6 +117,31 @@ public class AbstractPage {
 
 		driver.findElement(By.xpath(xpathExpression)).clear();
 		driver.findElement(By.xpath(xpathExpression)).sendKeys(value);
+	}
+
+	public Object sendkeyToElementByJS(WebDriver driver, String xpathExpression, String value) {
+		try {
+			WebElement element = driver.findElement(By.xpath(xpathExpression));
+
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			return js.executeScript("arguments[0].setAttribute('value', '" + value + "')", element);
+		} catch (Exception e) {
+			e.getMessage();
+			return null;
+		}
+	}
+
+	public Object sendkeyToElementByJS(WebDriver driver, String xpathExpression, String value, String... values) {
+		try {
+			xpathExpression = String.format(xpathExpression, (Object[]) values);
+			WebElement element = driver.findElement(By.xpath(xpathExpression));
+
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			return js.executeScript("arguments[0].setAttribute('type', 'text')", element);
+		} catch (Exception e) {
+			e.getMessage();
+			return null;
+		}
 	}
 
 	public void selectItemInHtmlDropdownByVisibleText(WebDriver driver, String xpathExpression, String value) {
@@ -466,18 +492,6 @@ public class AbstractPage {
 
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			return js.executeScript("arguments[0].srollIntoView(true);", element);
-		} catch (Exception e) {
-			e.getMessage();
-			return null;
-		}
-	}
-
-	public Object sendkeyToElementByJS(WebDriver driver, String xpathExpression, String value) {
-		try {
-			WebElement element = driver.findElement(By.xpath(xpathExpression));
-
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			return js.executeScript("arguments[0].setAttribute('value', '" + value + "')", element);
 		} catch (Exception e) {
 			e.getMessage();
 			return null;

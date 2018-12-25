@@ -16,16 +16,16 @@ public class Common_01_CreateUser extends AbstractTest {
 	public void beforeSuite(String browserName) {
 		driver = openMultiBrowser(browserName);
 		loginPage = PageFactoryManager.getLogInPage(driver);
-		
+
 		email = "automations" + randomNumber() + "@gmail.com";
-		
+
 		registerPage = loginPage.clickToHereLink();
 		registerPage.inputToEmailTextBox(email);
 		registerPage.clickToSubmitButton();
-		
+
 		userID = registerPage.getUserIDText();
 		password = registerPage.getPasswordText();
-		
+
 		closeBrowser(driver);
 	}
 

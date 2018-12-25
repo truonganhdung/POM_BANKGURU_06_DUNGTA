@@ -2,7 +2,6 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 
-import bankguru.LoginPageUI;
 import bankguru.RegisterPageUI;
 import commons.AbstractPage;
 import commons.PageFactoryManager;
@@ -13,15 +12,21 @@ public class RegisterPageObject extends AbstractPage {
 	public RegisterPageObject(WebDriver driverTestCase) {
 		this.driver = driverTestCase;
 	}
-	
+
 	public void inputToEmailTextBox(String email) {
 		waitForControlVisible(driver, RegisterPageUI.EMAILID_TEXTBOX);
-		sendkeyToElement(driver, RegisterPageUI.EMAILID_TEXTBOX, email);
+		if (driver.toString().toLowerCase().contains("internetexplorer")) {
+			sendkeyToElementByJS(driver, RegisterPageUI.EMAILID_TEXTBOX, email);
+			staticSleep(5);
+		} else {
+			sendkeyToElement(driver, RegisterPageUI.EMAILID_TEXTBOX, email);
+		}
+		
 	}
 
 	public void clickToSubmitButton() {
 		waitForControlVisible(driver, RegisterPageUI.SUBMIT_BUTTON);
-		
+
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
 			clickToElementByJS(driver, RegisterPageUI.SUBMIT_BUTTON);
 			staticSleep(5);
@@ -39,7 +44,7 @@ public class RegisterPageObject extends AbstractPage {
 		waitForControlVisible(driver, RegisterPageUI.PASSWORD_TEXT);
 		return getTextElement(driver, RegisterPageUI.PASSWORD_TEXT);
 	}
-	
+
 	public LoginPageObject openLoginPageByUrl(String loginPageUrl) {
 		openAnyUrl(driver, loginPageUrl);
 		return PageFactoryManager.getLogInPage(driver);

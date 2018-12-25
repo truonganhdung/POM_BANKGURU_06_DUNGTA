@@ -4,7 +4,7 @@ public class Customer {
 	public class NewCustomer {
 		public static final String CUSTOMER_NAME = "Automation Testings";
 		public static final String DATE_OF_BIRTH = "01-01-1989";
-		public static final String ADDRESS = "123 VVT";
+		public static final String ADDRESS = "123 Vo Van Tan";
 		public static final String CITY = "HCMC";
 		public static final String STATE = "district";
 		public static final String PIN = "600000";

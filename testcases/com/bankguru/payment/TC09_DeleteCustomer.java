@@ -34,14 +34,18 @@ public class TC09_DeleteCustomer extends AbstractTest {
 	}
 
 	@Test
-	public void Payment_TC08_DeleteAccount_Payers() {
+	public void Payment_TC09_DeleteCustomer() {
 		deleteCustomerPage = homePage.openDeleteCustomerPage(driver);
 
 		deleteCustomerPage.sendkeyToElement(driver, DeleteCustomerPageUI.DYNAMIC_TEXTBOX, TC01_CreateNewCustomer.CustomerID, DynamicLocator.CUSTOMER_ID);
 		deleteCustomerPage.clickToElement(driver, DeleteCustomerPageUI.SUBMIT_BUTTON);
 
 		acceptAlert(driver);
-		acceptAlert(driver, Customer.DeleteCustomer.VERIFY_DELETE_CUSTOMER);
+		if (driver.toString().toLowerCase().contains("firefox")) {
+			acceptAlert(driver);
+		} else {
+			acceptAlert(driver, Customer.DeleteCustomer.VERIFY_DELETE_CUSTOMER);
+		}
 
 	}
 

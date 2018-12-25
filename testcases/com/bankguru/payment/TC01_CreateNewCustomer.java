@@ -37,7 +37,12 @@ public class TC01_CreateNewCustomer extends AbstractTest {
 		newCustomerPage = homePage.openNewCustomerPage(driver);
 
 		newCustomerPage.sendkeyToElement(driver, NewCustomerPageUI.DYNAMIC_TEXTBOX, Customer.NewCustomer.CUSTOMER_NAME, DynamicLocator.CUSTOMER_NAME);
-		newCustomerPage.sendkeyToElement(driver, NewCustomerPageUI.DYNAMIC_TEXTBOX, Customer.NewCustomer.DATE_OF_BIRTH, DynamicLocator.DATE_OF_BIRTH);
+		if (driver.toString().toLowerCase().contains("firefox")) {
+			sendkeyToElementByJS(driver, NewCustomerPageUI.DYNAMIC_TEXTBOX, Customer.NewCustomer.DATE_OF_BIRTH, DynamicLocator.DATE_OF_BIRTH);
+			newCustomerPage.sendkeyToElement(driver, NewCustomerPageUI.DYNAMIC_TEXTBOX, Customer.NewCustomer.DATE_OF_BIRTH, DynamicLocator.DATE_OF_BIRTH);
+		} else {
+			newCustomerPage.sendkeyToElement(driver, NewCustomerPageUI.DYNAMIC_TEXTBOX, Customer.NewCustomer.DATE_OF_BIRTH, DynamicLocator.DATE_OF_BIRTH);
+		}
 		newCustomerPage.sendkeyToElement(driver, NewCustomerPageUI.DYNAMIC_TEXTAREA, Customer.NewCustomer.ADDRESS, DynamicLocator.ADDRESS);
 		newCustomerPage.sendkeyToElement(driver, NewCustomerPageUI.DYNAMIC_TEXTBOX, Customer.NewCustomer.CITY, DynamicLocator.CITY);
 		newCustomerPage.sendkeyToElement(driver, NewCustomerPageUI.DYNAMIC_TEXTBOX, Customer.NewCustomer.STATE, DynamicLocator.STATE);
