@@ -69,16 +69,24 @@ public class AbstractPage {
 	}
 
 	public void acceptAlert(WebDriver driver) {
+		wait = new WebDriverWait(driver, 5);
+		wait.until(ExpectedConditions.alertIsPresent());
+		
 		driver.switchTo().alert().accept();
+		driver.switchTo().defaultContent();
 	}
 
 	public void acceptAlert(WebDriver driver, String expected) {
+		wait = new WebDriverWait(driver, 5);
+		wait.until(ExpectedConditions.alertIsPresent());
+		
 		Alert alert = driver.switchTo().alert();
 
 		AbstractTest abstractTest = new AbstractTest();
 		abstractTest.verifyEquals(alert.getText(), expected);
 
 		alert.accept();
+		driver.switchTo().defaultContent();
 	}
 
 	public void cancelAlert(WebDriver driver) {
@@ -749,6 +757,7 @@ public class AbstractPage {
 	private int longTimeOut = 20;
 	private int shortTimeOut = 3;
 	private Date date;
+	private WebDriverWait wait;
 
 	private String root = System.getProperty("user.dir");
 }
