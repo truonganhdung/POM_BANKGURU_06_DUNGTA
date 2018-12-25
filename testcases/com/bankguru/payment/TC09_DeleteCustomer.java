@@ -41,11 +41,7 @@ public class TC09_DeleteCustomer extends AbstractTest {
 		deleteCustomerPage.clickToElement(driver, DeleteCustomerPageUI.SUBMIT_BUTTON);
 
 		acceptAlert(driver);
-		if (driver.toString().toLowerCase().contains("firefox")) {
-			acceptAlert(driver);
-		} else {
-			acceptAlert(driver, Customer.DeleteCustomer.VERIFY_DELETE_CUSTOMER);
-		}
+		acceptAlert(driver, Customer.DeleteCustomer.VERIFY_DELETE_CUSTOMER);
 
 	}
 
