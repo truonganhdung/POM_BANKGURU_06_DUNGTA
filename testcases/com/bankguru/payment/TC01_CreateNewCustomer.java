@@ -19,7 +19,6 @@ import payment.Customer;
 import payment.DynamicLocator;
 
 public class TC01_CreateNewCustomer extends AbstractTest {
-	AbstractPage abstractPage = new AbstractPage();
 
 	@Parameters("browser")
 	@BeforeClass
@@ -36,21 +35,16 @@ public class TC01_CreateNewCustomer extends AbstractTest {
 	public void Payment_TC01_CreateNewCustomer() {
 		newCustomerPage = homePage.openNewCustomerPage(driver);
 
-		newCustomerPage.sendkeyToElement(driver, NewCustomerPageUI.DYNAMIC_TEXTBOX, Customer.NewCustomer.CUSTOMER_NAME, DynamicLocator.CUSTOMER_NAME);
-		if (driver.toString().toLowerCase().contains("firefox")) {
-			sendkeyToElementByJS(driver, NewCustomerPageUI.DYNAMIC_TEXTBOX, Customer.NewCustomer.DATE_OF_BIRTH, DynamicLocator.DATE_OF_BIRTH);
-			newCustomerPage.sendkeyToElement(driver, NewCustomerPageUI.DYNAMIC_TEXTBOX, Customer.NewCustomer.DATE_OF_BIRTH, DynamicLocator.DATE_OF_BIRTH);
-		} else {
-			newCustomerPage.sendkeyToElement(driver, NewCustomerPageUI.DYNAMIC_TEXTBOX, Customer.NewCustomer.DATE_OF_BIRTH, DynamicLocator.DATE_OF_BIRTH);
-		}
-		newCustomerPage.sendkeyToElement(driver, NewCustomerPageUI.DYNAMIC_TEXTAREA, Customer.NewCustomer.ADDRESS, DynamicLocator.ADDRESS);
-		newCustomerPage.sendkeyToElement(driver, NewCustomerPageUI.DYNAMIC_TEXTBOX, Customer.NewCustomer.CITY, DynamicLocator.CITY);
-		newCustomerPage.sendkeyToElement(driver, NewCustomerPageUI.DYNAMIC_TEXTBOX, Customer.NewCustomer.STATE, DynamicLocator.STATE);
-		newCustomerPage.sendkeyToElement(driver, NewCustomerPageUI.DYNAMIC_TEXTBOX, Customer.NewCustomer.PIN, DynamicLocator.PIN);
-		newCustomerPage.sendkeyToElement(driver, NewCustomerPageUI.DYNAMIC_TEXTBOX, Customer.NewCustomer.MOBILE, DynamicLocator.MOBILE);
-		newCustomerPage.sendkeyToElement(driver, NewCustomerPageUI.DYNAMIC_TEXTBOX, Customer.NewCustomer.PREFIX_EMAIL + randomNumber() + "@amil.com", DynamicLocator.EMAIL);
-		newCustomerPage.sendkeyToElement(driver, NewCustomerPageUI.DYNAMIC_TEXTBOX, Customer.NewCustomer.PASSWORD, DynamicLocator.PASSWORD);
-		newCustomerPage.clickToElement(driver, NewCustomerPageUI.SUBMIT_BUTTON);
+		newCustomerPage.inputToCustomerNameTextBox(Customer.NewCustomer.CUSTOMER_NAME);
+		newCustomerPage.inputToDoBTextBox(Customer.NewCustomer.DATE_OF_BIRTH);
+		newCustomerPage.inputToAddressTextArea(Customer.NewCustomer.ADDRESS);
+		newCustomerPage.inputToCityTextBox(Customer.NewCustomer.CITY);
+		newCustomerPage.inputToStateTextBox(Customer.NewCustomer.STATE);
+		newCustomerPage.inputToPinTextBox(Customer.NewCustomer.PIN);
+		newCustomerPage.inputToMobileTextBox(Customer.NewCustomer.MOBILE);
+		newCustomerPage.inputToEmailTextBox(Customer.NewCustomer.PREFIX_EMAIL);
+		newCustomerPage.inputToPasswordTextBox(Customer.NewCustomer.PASSWORD);
+		newCustomerPage.clickToSubmitButton(driver);
 
 		verifyEquals(newCustomerPage.getRegisteredSuccessfullyText(), Customer.NewCustomer.VERIFY_CREATE_NEW_CUSTOMER);
 

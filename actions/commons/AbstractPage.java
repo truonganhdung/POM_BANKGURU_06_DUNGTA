@@ -20,7 +20,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import bankguru.AbstractPageUI;
 import pages.BalanceEnquiryPageObject;
 import pages.DeleteAccountPageObject;
 import pages.DeleteCustomerPageObject;
@@ -32,6 +31,7 @@ import pages.LoginPageObject;
 import pages.NewAccountPageObject;
 import pages.NewCustomerPageObject;
 import pages.WithdrawalPageObject;
+import bankguru.AbstractPageUI;
 
 public class AbstractPage {
 	public void openAnyUrl(WebDriver driver, String url) {
@@ -69,17 +69,13 @@ public class AbstractPage {
 	}
 
 	public void acceptAlert(WebDriver driver) {
-		wait = new WebDriverWait(driver, 5);
-		wait.until(ExpectedConditions.alertIsPresent());
-		
 		driver.switchTo().alert().accept();
 		driver.switchTo().defaultContent();
 	}
 
 	public void acceptAlert(WebDriver driver, String expected) {
-		wait = new WebDriverWait(driver, 5);
-		wait.until(ExpectedConditions.alertIsPresent());
-		
+		waitForAlertPresence(driver);
+
 		Alert alert = driver.switchTo().alert();
 
 		AbstractTest abstractTest = new AbstractTest();
@@ -101,7 +97,7 @@ public class AbstractPage {
 		driver.switchTo().alert().sendKeys(value);
 	}
 
-	public void clickToElement(WebDriver driver, String xpathExpression) {
+	public static void clickToElement(WebDriver driver, String xpathExpression) {
 		driver.findElement(By.xpath(xpathExpression)).click();
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
@@ -120,7 +116,7 @@ public class AbstractPage {
 		driver.findElement(By.xpath(xpathExpression)).sendKeys(value);
 	}
 
-	public void sendkeyToElement(WebDriver driver, String xpathExpression, String value, String... values) {
+	public static void sendkeyToElement(WebDriver driver, String xpathExpression, String value, String... values) {
 		xpathExpression = String.format(xpathExpression, (Object[]) values);
 
 		driver.findElement(By.xpath(xpathExpression)).clear();
@@ -139,7 +135,20 @@ public class AbstractPage {
 		}
 	}
 
-	public Object sendkeyToElementByJS(WebDriver driver, String xpathExpression, String value, String... values) {
+	public static Object sendkeyToElementByJS(WebDriver driver, String xpathExpression, String value, String... values) {
+		try {
+			xpathExpression = String.format(xpathExpression, (Object[]) values);
+			WebElement element = driver.findElement(By.xpath(xpathExpression));
+
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			return js.executeScript("arguments[0].setAttribute('value', '" + value + "')", element);
+		} catch (Exception e) {
+			e.getMessage();
+			return null;
+		}
+	}
+
+	public Object setAttributeOfElementByJS(WebDriver driver, String xpathExpression, String... values) {
 		try {
 			xpathExpression = String.format(xpathExpression, (Object[]) values);
 			WebElement element = driver.findElement(By.xpath(xpathExpression));
@@ -424,7 +433,7 @@ public class AbstractPage {
 		robot.keyRelease(KeyEvent.VK_ENTER);
 	}
 
-	public Object clickToElementByJS(WebDriver driver, String xpathExpression) {
+	public static Object clickToElementByJS(WebDriver driver, String xpathExpression) {
 		try {
 			WebElement element = driver.findElement(By.xpath(xpathExpression));
 
@@ -547,14 +556,14 @@ public class AbstractPage {
 		wait.until(ExpectedConditions.presenceOfElementLocated(by));
 	}
 
-	public void waitForControlVisible(WebDriver driver, String xpathExpression) {
+	public static void waitForControlVisible(WebDriver driver, String xpathExpression) {
 		By by = By.xpath(xpathExpression);
 
 		WebDriverWait wait = new WebDriverWait(driver, longTimeOut);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(by));
 	}
 
-	public void waitForControlVisible(WebDriver driver, String xpathExpression, String... values) {
+	public static void waitForControlVisible(WebDriver driver, String xpathExpression, String... values) {
 		xpathExpression = String.format(xpathExpression, (Object[]) values);
 		By by = By.xpath(xpathExpression);
 
@@ -600,7 +609,7 @@ public class AbstractPage {
 		action.keyUp(Keys.TAB).perform();
 	}
 
-	public void staticSleep(long timeout) {
+	public static void staticSleep(long timeout) {
 		try {
 			Thread.sleep(timeout * 1000);
 		} catch (InterruptedException e) {
@@ -754,10 +763,9 @@ public class AbstractPage {
 	}
 
 	private Actions action;
-	private int longTimeOut = 20;
+	private static int longTimeOut = 20;
 	private int shortTimeOut = 3;
 	private Date date;
-	private WebDriverWait wait;
 
 	private String root = System.getProperty("user.dir");
 }

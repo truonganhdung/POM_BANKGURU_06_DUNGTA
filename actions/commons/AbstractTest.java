@@ -1,5 +1,7 @@
 package commons;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -18,9 +20,7 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Reporter;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-
-public class AbstractTest extends AbstractPage{
+public class AbstractTest extends AbstractPage {
 	protected AbstractTest() {
 		log = LogFactory.getLog(getClass());
 	}
@@ -50,13 +50,13 @@ public class AbstractTest extends AbstractPage{
 			driver = new FirefoxDriver(capabilities);
 		} else if (browserName.equals("firefoxheadless")) {
 			WebDriverManager.firefoxdriver().setup();
-			
+
 			System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, "true");
 			System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, workingDir + "\\FirefoxBrowserLog.txt");
 
 			FirefoxOptions options = new FirefoxOptions();
 			options.setHeadless(true);
-			
+
 			driver = new FirefoxDriver(options);
 		} else if (browserName.equals("chrome")) {
 			WebDriverManager.chromedriver().setup();
@@ -76,11 +76,11 @@ public class AbstractTest extends AbstractPage{
 			ChromeOptions options = new ChromeOptions();
 			options.addArguments("headless");
 			options.addArguments("window-size=1920x1080");
-			
+
 			driver = new ChromeDriver(options);
 		} else if (browserName.equals("ie")) {
 			WebDriverManager.iedriver().arch32().setup();
-			
+
 			DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
 			capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 			capabilities.setCapability(CapabilityType.ELEMENT_SCROLL_BEHAVIOR, true);
@@ -92,7 +92,7 @@ public class AbstractTest extends AbstractPage{
 			capabilities.setCapability("enableElementCacheCleanup", true);
 			capabilities.setBrowserName("internet explorer");
 			capabilities.setPlatform(org.openqa.selenium.Platform.ANY);
-			
+
 			driver = new InternetExplorerDriver(capabilities);
 		} else if (browserName.equals("edge")) {
 			WebDriverManager.edgedriver().setup();
@@ -109,7 +109,7 @@ public class AbstractTest extends AbstractPage{
 		return driver;
 	}
 
-	public int randomNumber() {
+	public static int randomNumber() {
 		Random rand = new Random();
 		int random = rand.nextInt(99999) + 1;
 		return random;
@@ -118,7 +118,7 @@ public class AbstractTest extends AbstractPage{
 	protected void closeBrowser(WebDriver driver) {
 		try {
 			staticSleep(1);
-			
+
 			// IE-11
 			driver.manage().deleteAllCookies();
 

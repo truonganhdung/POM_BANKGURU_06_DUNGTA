@@ -37,25 +37,25 @@ public class TC02_EditCustomer extends AbstractTest {
 	public void Payment_TC02_EditCustomer() {
 		editCustomerPage = homePage.openEditCustomerPage(driver);
 
-		editCustomerPage.sendkeyToElement(driver, EditCustomerPageUI.DYNAMIC_TEXTBOX, TC01_CreateNewCustomer.CustomerID, DynamicLocator.CUSTOMER_ID);
-		editCustomerPage.clickToElement(driver, EditCustomerPageUI.SUBMIT_BUTTON);
+		editCustomerPage.inputToCustomerIdTextBox(TC01_CreateNewCustomer.CustomerID);
+		editCustomerPage.clickToSubmitButton(driver);
 
 		editCustomerPage = PageFactoryManager.getEditCustomerPage(driver);
 
-		editCustomerPage.sendkeyToElement(driver, EditCustomerPageUI.DYNAMIC_TEXTAREA, Customer.EditCustomer.EDIT_ADDRESS, DynamicLocator.ADDRESS);
-		editCustomerPage.sendkeyToElement(driver, EditCustomerPageUI.DYNAMIC_TEXTBOX, Customer.EditCustomer.EDIT_CITY, DynamicLocator.CITY);
-		editCustomerPage.sendkeyToElement(driver, EditCustomerPageUI.DYNAMIC_TEXTBOX, Customer.EditCustomer.EDIT_STATE, DynamicLocator.STATE);
-		editCustomerPage.sendkeyToElement(driver, EditCustomerPageUI.DYNAMIC_TEXTBOX, Customer.EditCustomer.EDIT_PIN, DynamicLocator.PIN);
-		editCustomerPage.sendkeyToElement(driver, EditCustomerPageUI.DYNAMIC_TEXTBOX, Customer.EditCustomer.EDIT_MOBILE + randomNumber() + "@amil.com", DynamicLocator.MOBILE);
-		editCustomerPage.sendkeyToElement(driver, EditCustomerPageUI.DYNAMIC_TEXTBOX, Customer.EditCustomer.EDIT_PREFIX_EMAIL, DynamicLocator.EMAIL);
-		editCustomerPage.clickToElement(driver, EditCustomerPageUI.SUBMIT_BUTTON);
+		editCustomerPage.inputToAddressTextArea(Customer.EditCustomer.EDIT_ADDRESS);
+		editCustomerPage.inputToCityTextBox(Customer.EditCustomer.EDIT_CITY);
+		editCustomerPage.inputToStateTextBox(Customer.EditCustomer.EDIT_STATE);
+		editCustomerPage.inputToPinTextBox(Customer.EditCustomer.EDIT_PIN);
+		editCustomerPage.inputToMobileTextBox(Customer.EditCustomer.EDIT_MOBILE);
+		editCustomerPage.inputToEmailTextBox(Customer.EditCustomer.EDIT_PREFIX_EMAIL);
+		editCustomerPage.clickToSubmitButton(driver);
 
 		verifyEquals(editCustomerPage.getUpdatedSuccessfullyText(), Customer.EditCustomer.VERIFY_EDIT_CUSTOMER);
 	}
 
 	@AfterClass
 	public void afterClass() {
-		closeBrowser(driver);
+//		closeBrowser(driver);
 	}
 
 	WebDriver driver;
