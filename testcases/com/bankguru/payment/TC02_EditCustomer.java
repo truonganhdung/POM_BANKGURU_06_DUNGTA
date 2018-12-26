@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 
 import com.bankguru.common.Common_01_CreateUser;
 
-import bankguru.EditCustomerPageUI;
 import commons.AbstractPage;
 import commons.AbstractTest;
 import commons.PageFactoryManager;
@@ -16,7 +15,6 @@ import pages.EditCustomerPageObject;
 import pages.HomePageObject;
 import pages.LoginPageObject;
 import payment.Customer;
-import payment.DynamicLocator;
 
 public class TC02_EditCustomer extends AbstractTest {
 	AbstractPage abstractPage = new AbstractPage();
@@ -36,26 +34,26 @@ public class TC02_EditCustomer extends AbstractTest {
 	@Test
 	public void Payment_TC02_EditCustomer() {
 		editCustomerPage = homePage.openEditCustomerPage(driver);
-
+		
 		editCustomerPage.inputToCustomerIdTextBox(TC01_CreateNewCustomer.CustomerID);
-		editCustomerPage.clickToSubmitButton(driver);
+		editCustomerPage.clickToSubmitButton();
 
 		editCustomerPage = PageFactoryManager.getEditCustomerPage(driver);
 
-		editCustomerPage.inputToAddressTextArea(Customer.EditCustomer.EDIT_ADDRESS);
-		editCustomerPage.inputToCityTextBox(Customer.EditCustomer.EDIT_CITY);
-		editCustomerPage.inputToStateTextBox(Customer.EditCustomer.EDIT_STATE);
-		editCustomerPage.inputToPinTextBox(Customer.EditCustomer.EDIT_PIN);
-		editCustomerPage.inputToMobileTextBox(Customer.EditCustomer.EDIT_MOBILE);
-		editCustomerPage.inputToEmailTextBox(Customer.EditCustomer.EDIT_PREFIX_EMAIL);
-		editCustomerPage.clickToSubmitButton(driver);
+		editCustomerPage.editToAddressTextArea(Customer.EditCustomer.EDIT_ADDRESS);
+		editCustomerPage.editToCityTextBox(Customer.EditCustomer.EDIT_CITY);
+		editCustomerPage.editToStateTextBox(Customer.EditCustomer.EDIT_STATE);
+		editCustomerPage.editToPinTextBox(Customer.EditCustomer.EDIT_PIN);
+		editCustomerPage.editToMobileTextBox(Customer.EditCustomer.EDIT_MOBILE);
+		editCustomerPage.editToEmailTextBox(Customer.EditCustomer.EDIT_PREFIX_EMAIL);
+		editCustomerPage.clickToSubmitButton();
 
 		verifyEquals(editCustomerPage.getUpdatedSuccessfullyText(), Customer.EditCustomer.VERIFY_EDIT_CUSTOMER);
 	}
 
 	@AfterClass
 	public void afterClass() {
-//		closeBrowser(driver);
+		closeBrowser(driver);
 	}
 
 	WebDriver driver;

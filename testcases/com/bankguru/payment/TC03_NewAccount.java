@@ -37,10 +37,10 @@ public class TC03_NewAccount extends AbstractTest {
 	public void Payment_TC03_NewAccount_Payers() {
 		newAccountPage = homePage.openNewAccountPage(driver);
 		
-		newAccountPage.sendkeyToElement(driver, NewAccountPageUI.DYNAMIC_TEXTBOX, TC01_CreateNewCustomer.CustomerID, "Customer id");
-		newAccountPage.selectItemInHtmlDropdownByValue(driver, NewAccountPageUI.ACCOUNT_TYPE, "Current");
-		newAccountPage.sendkeyToElement(driver, NewAccountPageUI.DYNAMIC_TEXTBOX, Account.NewAccount.INITIAL_DEPOSIT, "Initial deposit");
-		newAccountPage.clickToElement(driver, NewAccountPageUI.SUBMIT_BUTTON);
+		newAccountPage.inputToCustomerIdTextBox(TC01_CreateNewCustomer.CustomerID);
+		newAccountPage.selectAccountTypeFromDropdownList(Account.NewAccount.ACCOUNT_TYPE);
+		newAccountPage.inputToInitialDepositTextBox(Account.NewAccount.INITIAL_DEPOSIT);
+		newAccountPage.clickToSubmitButton();
 		
 		verifyEquals(newAccountPage.getGeneratedSuccessfullyText(), Account.NewAccount.VERIFY_CREATE_ACCOUNT);
 		verifyEquals(newAccountPage.getCurrentAmount(), Account.NewAccount.INITIAL_DEPOSIT);
@@ -52,10 +52,10 @@ public class TC03_NewAccount extends AbstractTest {
 	public void Payment_TC03_NewAccount_Payees() {
 		newAccountPage = homePage.openNewAccountPage(driver);
 
-		newAccountPage.sendkeyToElement(driver, NewAccountPageUI.DYNAMIC_TEXTBOX, TC01_CreateNewCustomer.CustomerID, DynamicLocator.CUSTOMER_id);
-		newAccountPage.selectItemInHtmlDropdownByValue(driver, NewAccountPageUI.ACCOUNT_TYPE, DynamicLocator.CURRENT);
-		newAccountPage.sendkeyToElement(driver, NewAccountPageUI.DYNAMIC_TEXTBOX, Account.NewAccount.INITIAL_DEPOSIT, DynamicLocator.INITIAL_DEPOSIT);
-		newAccountPage.clickToElement(driver, NewAccountPageUI.SUBMIT_BUTTON);
+		newAccountPage.inputToCustomerIdTextBox(TC01_CreateNewCustomer.CustomerID);
+		newAccountPage.selectAccountTypeFromDropdownList(Account.NewAccount.ACCOUNT_TYPE);
+		newAccountPage.inputToInitialDepositTextBox(Account.NewAccount.INITIAL_DEPOSIT);
+		newAccountPage.clickToSubmitButton();
 
 		verifyEquals(newAccountPage.getGeneratedSuccessfullyText(), Account.NewAccount.VERIFY_CREATE_ACCOUNT);
 		verifyEquals(newAccountPage.getCurrentAmount(), Account.NewAccount.INITIAL_DEPOSIT);

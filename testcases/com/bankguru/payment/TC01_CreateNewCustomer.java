@@ -8,15 +8,12 @@ import org.testng.annotations.Test;
 
 import com.bankguru.common.Common_01_CreateUser;
 
-import bankguru.NewCustomerPageUI;
-import commons.AbstractPage;
 import commons.AbstractTest;
 import commons.PageFactoryManager;
 import pages.HomePageObject;
 import pages.LoginPageObject;
 import pages.NewCustomerPageObject;
 import payment.Customer;
-import payment.DynamicLocator;
 
 public class TC01_CreateNewCustomer extends AbstractTest {
 
@@ -44,7 +41,7 @@ public class TC01_CreateNewCustomer extends AbstractTest {
 		newCustomerPage.inputToMobileTextBox(Customer.NewCustomer.MOBILE);
 		newCustomerPage.inputToEmailTextBox(Customer.NewCustomer.PREFIX_EMAIL);
 		newCustomerPage.inputToPasswordTextBox(Customer.NewCustomer.PASSWORD);
-		newCustomerPage.clickToSubmitButton(driver);
+		newCustomerPage.clickToSubmitButton();
 
 		verifyEquals(newCustomerPage.getRegisteredSuccessfullyText(), Customer.NewCustomer.VERIFY_CREATE_NEW_CUSTOMER);
 

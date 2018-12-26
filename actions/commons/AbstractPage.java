@@ -116,7 +116,7 @@ public class AbstractPage {
 		driver.findElement(By.xpath(xpathExpression)).sendKeys(value);
 	}
 
-	public static void sendkeyToElement(WebDriver driver, String xpathExpression, String value, String... values) {
+	public static void sendkeyToElement(WebDriver driver, String value, String xpathExpression, String... values) {
 		xpathExpression = String.format(xpathExpression, (Object[]) values);
 
 		driver.findElement(By.xpath(xpathExpression)).clear();
@@ -135,7 +135,7 @@ public class AbstractPage {
 		}
 	}
 
-	public static Object sendkeyToElementByJS(WebDriver driver, String xpathExpression, String value, String... values) {
+	public static Object sendkeyToElementByJS(WebDriver driver, String value, String xpathExpression, String... values) {
 		try {
 			xpathExpression = String.format(xpathExpression, (Object[]) values);
 			WebElement element = driver.findElement(By.xpath(xpathExpression));

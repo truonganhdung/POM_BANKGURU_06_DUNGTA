@@ -37,10 +37,10 @@ public class TC04_Deposit extends AbstractTest {
 	public void Payment_TC04_Deposit() {
 		depositPage = homePage.openDepositPage(driver);
 
-		depositPage.sendkeyToElement(driver, DepositPageUI.DYNAMIC_TEXTBOX, TC03_NewAccount.Account_ID_Payers, DynamicLocator.ACCOUNT_NUMBER);
-		depositPage.sendkeyToElement(driver, DepositPageUI.DYNAMIC_TEXTBOX, Deposit.AMOUNT, DynamicLocator.AMOUNT);
-		depositPage.sendkeyToElement(driver, DepositPageUI.DYNAMIC_TEXTBOX, Deposit.DESCRIPTION, DynamicLocator.DESCRIPTION);
-		depositPage.clickToElement(driver, DepositPageUI.SUBMIT_BUTTON);
+		depositPage.inputToAccountNoTextBox(TC03_NewAccount.Account_ID_Payers);
+		depositPage.inputToAmountTextBox(Deposit.AMOUNT);
+		depositPage.inputToDescriptionTextBox(Deposit.DESCRIPTION);
+		depositPage.clickToSubmitButton();
 
 		String Verify_Deposit = "Transaction details of Deposit for Account " + TC03_NewAccount.Account_ID_Payers;
 		
