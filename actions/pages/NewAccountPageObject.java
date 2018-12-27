@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 
 import bankguru.NewAccountPageUI;
 import commons.AbstractPage;
-import payment.Account;
 import payment.DynamicLocator;
 
 public class NewAccountPageObject extends AbstractPage {

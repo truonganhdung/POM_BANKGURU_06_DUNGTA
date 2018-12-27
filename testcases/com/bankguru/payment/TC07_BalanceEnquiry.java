@@ -8,8 +8,6 @@ import org.testng.annotations.Test;
 
 import com.bankguru.common.Common_01_CreateUser;
 
-import bankguru.BalanceEnquiryPageUI;
-import bankguru.EditCustomerPageUI;
 import commons.AbstractPage;
 import commons.AbstractTest;
 import commons.PageFactoryManager;
@@ -17,7 +15,6 @@ import pages.BalanceEnquiryPageObject;
 import pages.HomePageObject;
 import pages.LoginPageObject;
 import payment.BalanceEnquiry;
-import payment.DynamicLocator;
 
 public class TC07_BalanceEnquiry extends AbstractTest {
 	AbstractPage abstractPage = new AbstractPage();
@@ -38,8 +35,8 @@ public class TC07_BalanceEnquiry extends AbstractTest {
 	public void Payment_TC07_BalanceEnquiry() {
 		balanceEnquiryPage = homePage.openBalanceEnquiryPage(driver);
 
-		balanceEnquiryPage.sendkeyToElement(driver, BalanceEnquiryPageUI.DYNAMIC_TEXTBOX, TC03_NewAccount.Account_ID_Payers, DynamicLocator.ACCOUNT_NUMBER);
-		balanceEnquiryPage.clickToElement(driver, EditCustomerPageUI.SUBMIT_BUTTON);
+		balanceEnquiryPage.inputToAccountNoTextBox(TC03_NewAccount.Account_ID_Payers);
+		balanceEnquiryPage.clickToSubmitButton();
 
 		balanceEnquiryPage = PageFactoryManager.getBalanceEnquiryPage(driver);
 
@@ -52,7 +49,7 @@ public class TC07_BalanceEnquiry extends AbstractTest {
 
 	@AfterClass
 	public void afterClass() {
-		 closeBrowser(driver);
+		closeBrowser(driver);
 	}
 
 	WebDriver driver;

@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 
 import com.bankguru.common.Common_01_CreateUser;
 
-import bankguru.NewAccountPageUI;
 import commons.AbstractPage;
 import commons.AbstractTest;
 import commons.PageFactoryManager;
@@ -16,7 +15,6 @@ import pages.HomePageObject;
 import pages.LoginPageObject;
 import pages.NewAccountPageObject;
 import payment.Account;
-import payment.DynamicLocator;
 
 public class TC03_NewAccount extends AbstractTest {
 	AbstractPage abstractPage = new AbstractPage();
@@ -36,18 +34,18 @@ public class TC03_NewAccount extends AbstractTest {
 	@Test
 	public void Payment_TC03_NewAccount_Payers() {
 		newAccountPage = homePage.openNewAccountPage(driver);
-		
+
 		newAccountPage.inputToCustomerIdTextBox(TC01_CreateNewCustomer.CustomerID);
 		newAccountPage.selectAccountTypeFromDropdownList(Account.NewAccount.ACCOUNT_TYPE);
 		newAccountPage.inputToInitialDepositTextBox(Account.NewAccount.INITIAL_DEPOSIT);
 		newAccountPage.clickToSubmitButton();
-		
+
 		verifyEquals(newAccountPage.getGeneratedSuccessfullyText(), Account.NewAccount.VERIFY_CREATE_ACCOUNT);
 		verifyEquals(newAccountPage.getCurrentAmount(), Account.NewAccount.INITIAL_DEPOSIT);
-		
+
 		Account_ID_Payers = newAccountPage.getAccountID();
 	}
-	
+
 	@Test
 	public void Payment_TC03_NewAccount_Payees() {
 		newAccountPage = homePage.openNewAccountPage(driver);

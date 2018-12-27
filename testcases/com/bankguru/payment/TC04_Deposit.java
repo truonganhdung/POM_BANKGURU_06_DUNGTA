@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 
 import com.bankguru.common.Common_01_CreateUser;
 
-import bankguru.DepositPageUI;
 import commons.AbstractPage;
 import commons.AbstractTest;
 import commons.PageFactoryManager;
@@ -16,7 +15,6 @@ import pages.DepositPageObject;
 import pages.HomePageObject;
 import pages.LoginPageObject;
 import payment.Deposit;
-import payment.DynamicLocator;
 
 public class TC04_Deposit extends AbstractTest {
 	AbstractPage abstractPage = new AbstractPage();
@@ -43,7 +41,7 @@ public class TC04_Deposit extends AbstractTest {
 		depositPage.clickToSubmitButton();
 
 		String Verify_Deposit = "Transaction details of Deposit for Account " + TC03_NewAccount.Account_ID_Payers;
-		
+
 		verifyEquals(depositPage.getTransactionSuccessfullyText(), Verify_Deposit);
 		verifyEquals(depositPage.getCurrentBalance(), Deposit.CURRENT_BALANCE);
 	}

@@ -4,7 +4,6 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -20,6 +19,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import bankguru.AbstractPageUI;
 import pages.BalanceEnquiryPageObject;
 import pages.DeleteAccountPageObject;
 import pages.DeleteCustomerPageObject;
@@ -31,7 +31,6 @@ import pages.LoginPageObject;
 import pages.NewAccountPageObject;
 import pages.NewCustomerPageObject;
 import pages.WithdrawalPageObject;
-import bankguru.AbstractPageUI;
 
 public class AbstractPage {
 	public void openAnyUrl(WebDriver driver, String url) {
@@ -251,12 +250,12 @@ public class AbstractPage {
 
 		List<WebElement> elements = driver.findElements(By.xpath(xpathExpression));
 		if (elements.size() == 0) {
-			date = new Date();
+			// date = new Date();
 			overrideGlobalTimeout(driver, longTimeOut);
 
 			return true;
 		} else {
-			date = new Date();
+			// date = new Date();
 			overrideGlobalTimeout(driver, longTimeOut);
 
 			return false;
@@ -269,12 +268,12 @@ public class AbstractPage {
 		xpathExpression = String.format(xpathExpression, (Object[]) values);
 		List<WebElement> elements = driver.findElements(By.xpath(xpathExpression));
 		if (elements.size() == 0) {
-			date = new Date();
+			// date = new Date();
 			overrideGlobalTimeout(driver, longTimeOut);
 
 			return true;
 		} else {
-			date = new Date();
+			// date = new Date();
 			overrideGlobalTimeout(driver, longTimeOut);
 
 			return false;
@@ -765,7 +764,7 @@ public class AbstractPage {
 	private Actions action;
 	private static int longTimeOut = 20;
 	private int shortTimeOut = 3;
-	private Date date;
+	// private Date date;
 
 	private String root = System.getProperty("user.dir");
 }

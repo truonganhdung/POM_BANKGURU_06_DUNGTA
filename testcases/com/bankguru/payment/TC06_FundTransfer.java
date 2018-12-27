@@ -8,14 +8,12 @@ import org.testng.annotations.Test;
 
 import com.bankguru.common.Common_01_CreateUser;
 
-import bankguru.FundTransferPageUI;
 import commons.AbstractPage;
 import commons.AbstractTest;
 import commons.PageFactoryManager;
 import pages.FundTransferPageObject;
 import pages.HomePageObject;
 import pages.LoginPageObject;
-import payment.DynamicLocator;
 import payment.FundTransfer;
 
 public class TC06_FundTransfer extends AbstractTest {
@@ -37,11 +35,11 @@ public class TC06_FundTransfer extends AbstractTest {
 	public void Payment_TC06_FundTransfer() {
 		fundTransferPage = homePage.openFundTransferPage(driver);
 
-		fundTransferPage.sendkeyToElement(driver, FundTransferPageUI.DYNAMIC_TEXTBOX, TC03_NewAccount.Account_ID_Payers, DynamicLocator.PAYERS_ACCOUNT_NUMBER);
-		fundTransferPage.sendkeyToElement(driver, FundTransferPageUI.DYNAMIC_TEXTBOX, TC03_NewAccount.Account_ID_Payees, DynamicLocator.PAYEES_ACCOUNT_NUMBER);
-		fundTransferPage.sendkeyToElement(driver, FundTransferPageUI.DYNAMIC_TEXTBOX, FundTransfer.AMOUNT, DynamicLocator.AMOUNT);
-		fundTransferPage.sendkeyToElement(driver, FundTransferPageUI.DYNAMIC_TEXTBOX, FundTransfer.DESCRIPTION, DynamicLocator.DESCRIPTION);
-		fundTransferPage.clickToElement(driver, FundTransferPageUI.SUBMIT_BUTTON);
+		fundTransferPage.inputToPayersAccountNoTextBox(TC03_NewAccount.Account_ID_Payers);
+		fundTransferPage.inputToPayeesAccountNoTextBox(TC03_NewAccount.Account_ID_Payees);
+		fundTransferPage.inputToAmountTextBox(FundTransfer.AMOUNT);
+		fundTransferPage.inputToDescriptionTextBox(FundTransfer.DESCRIPTION);
+		fundTransferPage.clickToSubmitButton();
 
 		verifyEquals(fundTransferPage.getAmount(), FundTransfer.AMOUNT);
 
@@ -49,7 +47,7 @@ public class TC06_FundTransfer extends AbstractTest {
 
 	@AfterClass
 	public void afterClass() {
-		 closeBrowser(driver);
+		closeBrowser(driver);
 	}
 
 	WebDriver driver;

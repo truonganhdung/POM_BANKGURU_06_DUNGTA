@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 
 import com.bankguru.common.Common_01_CreateUser;
 
-import bankguru.DeleteAccountPageUI;
 import commons.AbstractPage;
 import commons.AbstractTest;
 import commons.PageFactoryManager;
@@ -16,7 +15,6 @@ import pages.DeleteAccountPageObject;
 import pages.HomePageObject;
 import pages.LoginPageObject;
 import payment.Account;
-import payment.DynamicLocator;
 
 public class TC08_DeleteAccount extends AbstractTest {
 	AbstractPage abstractPage = new AbstractPage();
@@ -32,25 +30,25 @@ public class TC08_DeleteAccount extends AbstractTest {
 		homePage = loginPage.clickToLoginButton();
 
 	}
-	
+
 	@Test
 	public void Payment_TC08_DeleteAccount_Payers() {
 		deleteAccountPage = homePage.openDeleteAccountPage(driver);
-		
-		deleteAccountPage.sendkeyToElement(driver, DeleteAccountPageUI.DYNAMIC_TEXTBOX, TC03_NewAccount.Account_ID_Payers, DynamicLocator.ACCOUNT_NUMBER);
-		deleteAccountPage.clickToElement(driver, DeleteAccountPageUI.SUBMIT_BUTTON);
-		
+
+		deleteAccountPage.inputToAccountNoTextBox(TC03_NewAccount.Account_ID_Payers);
+		deleteAccountPage.clickToSubmitButton();
+
 		acceptAlert(driver);
 		acceptAlert(driver, Account.DeleteAccount.VERIFY_DELETE_ACCOUNT);
-		
+
 	}
 
 	@Test
 	public void Payment_TC08_DeleteAccount_Payees() {
 		deleteAccountPage = homePage.openDeleteAccountPage(driver);
 
-		deleteAccountPage.sendkeyToElement(driver, DeleteAccountPageUI.DYNAMIC_TEXTBOX, TC03_NewAccount.Account_ID_Payees, DynamicLocator.ACCOUNT_NUMBER);
-		deleteAccountPage.clickToElement(driver, DeleteAccountPageUI.SUBMIT_BUTTON);
+		deleteAccountPage.inputToAccountNoTextBox(TC03_NewAccount.Account_ID_Payees);
+		deleteAccountPage.clickToSubmitButton();
 
 		acceptAlert(driver);
 		acceptAlert(driver, Account.DeleteAccount.VERIFY_DELETE_ACCOUNT);
@@ -59,7 +57,7 @@ public class TC08_DeleteAccount extends AbstractTest {
 
 	@AfterClass
 	public void afterClass() {
-		 closeBrowser(driver);
+		closeBrowser(driver);
 	}
 
 	WebDriver driver;

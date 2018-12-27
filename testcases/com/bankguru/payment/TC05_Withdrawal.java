@@ -8,14 +8,12 @@ import org.testng.annotations.Test;
 
 import com.bankguru.common.Common_01_CreateUser;
 
-import bankguru.WithdrawalPageUI;
 import commons.AbstractPage;
 import commons.AbstractTest;
 import commons.PageFactoryManager;
 import pages.HomePageObject;
 import pages.LoginPageObject;
 import pages.WithdrawalPageObject;
-import payment.DynamicLocator;
 import payment.Withdrawal;
 
 public class TC05_Withdrawal extends AbstractTest {
@@ -37,10 +35,10 @@ public class TC05_Withdrawal extends AbstractTest {
 	public void Payment_TC05_Withdrawal() {
 		withdrawalPage = homePage.openWithdrawalPage(driver);
 
-		withdrawalPage.sendkeyToElement(driver, WithdrawalPageUI.DYNAMIC_TEXTBOX, TC03_NewAccount.Account_ID_Payers, DynamicLocator.ACCOUNT_NUMBER);
-		withdrawalPage.sendkeyToElement(driver, WithdrawalPageUI.DYNAMIC_TEXTBOX, Withdrawal.AMOUNT, DynamicLocator.AMOUNT);
-		withdrawalPage.sendkeyToElement(driver, WithdrawalPageUI.DYNAMIC_TEXTBOX, Withdrawal.DESCRIPTION, DynamicLocator.DESCRIPTION);
-		withdrawalPage.clickToElement(driver, WithdrawalPageUI.SUBMIT_BUTTON);
+		withdrawalPage.inputToAccountNoTextBox(TC03_NewAccount.Account_ID_Payers);
+		withdrawalPage.inputToAmountTextBox(Withdrawal.AMOUNT);
+		withdrawalPage.inputToDescriptionTextBox(Withdrawal.DESCRIPTION);
+		withdrawalPage.clickToSubmitButton();
 
 		String Verify_Withdrawal = "Transaction details of Withdrawal for Account " + TC03_NewAccount.Account_ID_Payers;
 

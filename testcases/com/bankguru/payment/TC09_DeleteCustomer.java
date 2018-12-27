@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 
 import com.bankguru.common.Common_01_CreateUser;
 
-import bankguru.DeleteCustomerPageUI;
 import commons.AbstractPage;
 import commons.AbstractTest;
 import commons.PageFactoryManager;
@@ -16,7 +15,6 @@ import pages.DeleteCustomerPageObject;
 import pages.HomePageObject;
 import pages.LoginPageObject;
 import payment.Customer;
-import payment.DynamicLocator;
 
 public class TC09_DeleteCustomer extends AbstractTest {
 	AbstractPage abstractPage = new AbstractPage();
@@ -37,8 +35,8 @@ public class TC09_DeleteCustomer extends AbstractTest {
 	public void Payment_TC09_DeleteCustomer() {
 		deleteCustomerPage = homePage.openDeleteCustomerPage(driver);
 
-		deleteCustomerPage.sendkeyToElement(driver, DeleteCustomerPageUI.DYNAMIC_TEXTBOX, TC01_CreateNewCustomer.CustomerID, DynamicLocator.CUSTOMER_ID);
-		deleteCustomerPage.clickToElement(driver, DeleteCustomerPageUI.SUBMIT_BUTTON);
+		deleteCustomerPage.inputToCustomerIdTextBox(TC01_CreateNewCustomer.CustomerID);
+		deleteCustomerPage.clickToSubmitButton();
 
 		acceptAlert(driver);
 		acceptAlert(driver, Customer.DeleteCustomer.VERIFY_DELETE_CUSTOMER);
