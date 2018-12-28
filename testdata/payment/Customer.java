@@ -15,6 +15,18 @@ public class Customer {
 		public static final String VERIFY_CREATE_NEW_CUSTOMER = "Customer Registered Successfully!!!";
 	}
 	
+	public class NewCustomer_Header {
+		public static final String CUSTOMER_ID = "Customer ID";
+		public static final String CUSTOMER_NAME = "Customer Name";
+		public static final String DATE_OF_BIRTH = "Birthdate";
+		public static final String ADDRESS = "Address";
+		public static final String CITY = "City";
+		public static final String STATE = "State";
+		public static final String PIN = "Pin";
+		public static final String MOBILE = "Mobile No.";
+		public static final String EMAIL = "Email";
+	}
+	
 	public class EditCustomer {
 		public static final String EDIT_ADDRESS = "Edit 123 VVT";
 		public static final String EDIT_CITY = "HCMC Edit";

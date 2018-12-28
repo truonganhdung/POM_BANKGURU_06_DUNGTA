@@ -39,14 +39,14 @@
 		<classes>
 			<class name="com.bankguru.common.Common_01_CreateUser" />
 			<class name="com.bankguru.payment.TC01_CreateNewCustomer" />
-			<class name="com.bankguru.payment.TC02_EditCustomer" />
+			<!-- <class name="com.bankguru.payment.TC02_EditCustomer" />
 			<class name="com.bankguru.payment.TC03_NewAccount" />
 			<class name="com.bankguru.payment.TC04_Deposit" />
 			<class name="com.bankguru.payment.TC05_Withdrawal" />
 			<class name="com.bankguru.payment.TC06_FundTransfer" />
 			<class name="com.bankguru.payment.TC07_BalanceEnquiry" />
 			<class name="com.bankguru.payment.TC08_DeleteAccount" />
-			<class name="com.bankguru.payment.TC09_DeleteCustomer" />
+			<class name="com.bankguru.payment.TC09_DeleteCustomer" /> -->
 		</classes>
 	</test>
 	

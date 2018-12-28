@@ -1,28 +1,20 @@
 package pages;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import org.openqa.selenium.WebDriver;
 
 import bankguru.NewCustomerPageUI;
 import commons.AbstractPage;
 import commons.AbstractTest;
+import payment.Customer;
 import payment.DynamicLocator;
 
 public class NewCustomerPageObject extends AbstractPage {
 	WebDriver driver;
-
-	public NewCustomerPageObject(WebDriver driver) {
-		this.driver = driver;
-	}
-
-	public String getCustomerIDText() {
-		waitForControlVisible(driver, NewCustomerPageUI.CUSTOMER_ID);
-		return getTextElement(driver, NewCustomerPageUI.CUSTOMER_ID);
-	}
-
-	public String getRegisteredSuccessfullyText() {
-		waitForControlVisible(driver, NewCustomerPageUI.VERIFY_CREATE_CUSTOMER);
-		return getTextElement(driver, NewCustomerPageUI.VERIFY_CREATE_CUSTOMER);
-	}
 
 	public void inputToCustomerNameTextBox(String customerName) {
 		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.CUSTOMER_NAME);
@@ -38,14 +30,12 @@ public class NewCustomerPageObject extends AbstractPage {
 	public void inputToDoBTextBox(String dateOfBirth) {
 		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.DATE_OF_BIRTH);
 
-		if (driver.toString().toLowerCase().contains("firefox")) {
-			setAttributeOfElementByJS(driver, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.DATE_OF_BIRTH);
-			sendkeyToElement(driver, dateOfBirth, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.DATE_OF_BIRTH);
-		} else if (driver.toString().toLowerCase().contains("internetexplorer")) {
+		if (driver.toString().toLowerCase().contains("internetexplorer")) {
 			sendkeyToElementByJS(driver, dateOfBirth, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.DATE_OF_BIRTH);
 			staticSleep(5);
 		} else {
-			sendkeyToElement(driver, NewCustomerPageUI.DYNAMIC_TEXTBOX, dateOfBirth, DynamicLocator.DATE_OF_BIRTH);
+			setAttributeOfElementByJS(driver, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.DATE_OF_BIRTH);
+			sendkeyToElement(driver, dateOfBirth, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.DATE_OF_BIRTH);
 		}
 	}
 
@@ -125,6 +115,74 @@ public class NewCustomerPageObject extends AbstractPage {
 		}
 	}
 
+	public NewCustomerPageObject(WebDriver driver) {
+		this.driver = driver;
+	}
+
+	public String getRegisteredText() {
+		waitForControlVisible(driver, NewCustomerPageUI.VERIFY_CREATE_CUSTOMER);
+		return getTextElement(driver, NewCustomerPageUI.VERIFY_CREATE_CUSTOMER);
+	}
+
+	public String getCustomerIDText() {
+		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.NewCustomer_Header.CUSTOMER_ID);
+		return getTextElement(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.NewCustomer_Header.CUSTOMER_ID);
+	}
+
+	public String getCustomerNameText() {
+		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.NewCustomer_Header.CUSTOMER_NAME);
+		return getTextElement(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.NewCustomer_Header.CUSTOMER_NAME);
+	}
+
+	public String getBirthdateText() {
+		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.NewCustomer_Header.DATE_OF_BIRTH);
+		String date_s = getTextElement(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.NewCustomer_Header.DATE_OF_BIRTH);
+
+		Date dt = null;
+		try {
+			dt = new SimpleDateFormat("yyyy-MM-dd").parse(date_s);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return myDateFormat(dt,"MM-dd-yyy");
+	}
+	
+	public String myDateFormat(Date dt, String pattern) {
+		Locale locale = new Locale("en", "US");
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, locale);
+		return simpleDateFormat.format(dt);
+	}
+
+	public String getAddressText() {
+		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.NewCustomer_Header.ADDRESS);
+		return getTextElement(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.NewCustomer_Header.ADDRESS);
+	}
+
+	public String getCityText() {
+		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.NewCustomer_Header.CITY);
+		return getTextElement(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.NewCustomer_Header.CITY);
+	}
+
+	public String getStateText() {
+		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.NewCustomer_Header.STATE);
+		return getTextElement(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.NewCustomer_Header.STATE);
+	}
+
+	public String getPinText() {
+		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.NewCustomer_Header.PIN);
+		return getTextElement(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.NewCustomer_Header.PIN);
+	}
+
+	public String getMobileNoText() {
+		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.NewCustomer_Header.MOBILE);
+		return getTextElement(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.NewCustomer_Header.MOBILE);
+	}
+
+	public String getEmailText() {
+		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.NewCustomer_Header.EMAIL);
+		return getTextElement(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.NewCustomer_Header.EMAIL);
+	}
+
 	public void clickToSubmitButton() {
 		waitForControlVisible(driver, NewCustomerPageUI.SUBMIT_BUTTON);
 
@@ -135,5 +193,5 @@ public class NewCustomerPageObject extends AbstractPage {
 			clickToElement(driver, NewCustomerPageUI.SUBMIT_BUTTON);
 		}
 	}
-	
+
 }

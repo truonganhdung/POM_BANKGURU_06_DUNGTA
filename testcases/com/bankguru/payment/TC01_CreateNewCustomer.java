@@ -43,9 +43,21 @@ public class TC01_CreateNewCustomer extends AbstractTest {
 		newCustomerPage.inputToPasswordTextBox(Customer.NewCustomer.PASSWORD);
 		newCustomerPage.clickToSubmitButton();
 
-		verifyEquals(newCustomerPage.getRegisteredSuccessfullyText(), Customer.NewCustomer.VERIFY_CREATE_NEW_CUSTOMER);
-
 		CustomerID = newCustomerPage.getCustomerIDText();
+	}
+
+	@Test
+	public void Payment_TC01_VerifyNewCustomer() {
+		verifyEquals(newCustomerPage.getRegisteredText(), Customer.NewCustomer.VERIFY_CREATE_NEW_CUSTOMER);
+
+		verifyEquals(newCustomerPage.getCustomerNameText(), Customer.NewCustomer.CUSTOMER_NAME);
+		verifyEquals(newCustomerPage.getBirthdateText(), Customer.NewCustomer.DATE_OF_BIRTH);
+		verifyEquals(newCustomerPage.getAddressText(), Customer.NewCustomer.ADDRESS);
+		verifyEquals(newCustomerPage.getCityText(), Customer.NewCustomer.CITY);
+		verifyEquals(newCustomerPage.getStateText(), Customer.NewCustomer.STATE);
+		verifyEquals(newCustomerPage.getPinText(), Customer.NewCustomer.PIN);
+		verifyEquals(newCustomerPage.getMobileNoText(), Customer.NewCustomer.MOBILE);
+
 	}
 
 	@AfterClass
