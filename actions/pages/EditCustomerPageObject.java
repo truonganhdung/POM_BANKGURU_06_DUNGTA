@@ -2,10 +2,12 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 
+import payment.Customer;
+import payment.DynamicLocator;
 import bankguru.EditCustomerPageUI;
+
 import commons.AbstractPage;
 import commons.AbstractTest;
-import payment.DynamicLocator;
 
 public class EditCustomerPageObject extends AbstractPage {
 	WebDriver driver;
@@ -13,8 +15,6 @@ public class EditCustomerPageObject extends AbstractPage {
 	public EditCustomerPageObject(WebDriver driver) {
 		this.driver = driver;
 	}
-
-	NewCustomerPageObject newCustomerPageObject = new NewCustomerPageObject(driver);
 
 	public void inputToCustomerIdTextBox(String customerID) {
 		waitForControlVisible(driver, EditCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.CUSTOMER_ID);
@@ -104,8 +104,34 @@ public class EditCustomerPageObject extends AbstractPage {
 		}
 	}
 
-	public String getUpdatedSuccessfullyText() {
+	public String getUpdatedText() {
 		waitForControlVisible(driver, EditCustomerPageUI.VERIFY_EDIT_CUSTOMER);
 		return getTextElement(driver, EditCustomerPageUI.VERIFY_EDIT_CUSTOMER);
 	}
+
+	public String getAddressText() {
+		waitForControlVisible(driver, EditCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.ADDRESS);
+		return getTextElement(driver, EditCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.ADDRESS);
+	}
+
+	public String getCityText() {
+		waitForControlVisible(driver, EditCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.CITY);
+		return getTextElement(driver, EditCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.CITY);
+	}
+
+	public String getStateText() {
+		waitForControlVisible(driver, EditCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.STATE);
+		return getTextElement(driver, EditCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.STATE);
+	}
+
+	public String getPinText() {
+		waitForControlVisible(driver, EditCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.PIN);
+		return getTextElement(driver, EditCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.PIN);
+	}
+
+	public String getMobileNoText() {
+		waitForControlVisible(driver, EditCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.MOBILE);
+		return getTextElement(driver, EditCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.MOBILE);
+	}
+
 }

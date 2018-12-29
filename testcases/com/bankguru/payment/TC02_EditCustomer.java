@@ -6,15 +6,15 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.bankguru.common.Common_01_CreateUser;
-
-import commons.AbstractPage;
-import commons.AbstractTest;
-import commons.PageFactoryManager;
 import pages.EditCustomerPageObject;
 import pages.HomePageObject;
 import pages.LoginPageObject;
 import payment.Customer;
+
+import com.bankguru.common.Common_01_CreateUser;
+import commons.AbstractPage;
+import commons.AbstractTest;
+import commons.PageFactoryManager;
 
 public class TC02_EditCustomer extends AbstractTest {
 	AbstractPage abstractPage = new AbstractPage();
@@ -34,7 +34,7 @@ public class TC02_EditCustomer extends AbstractTest {
 	@Test
 	public void Payment_TC02_EditCustomer() {
 		editCustomerPage = homePage.openEditCustomerPage(driver);
-		
+
 		editCustomerPage.inputToCustomerIdTextBox(TC01_CreateNewCustomer.CustomerID);
 		editCustomerPage.clickToSubmitButton();
 
@@ -48,7 +48,18 @@ public class TC02_EditCustomer extends AbstractTest {
 		editCustomerPage.editToEmailTextBox(Customer.EditCustomer.EDIT_PREFIX_EMAIL);
 		editCustomerPage.clickToSubmitButton();
 
-		verifyEquals(editCustomerPage.getUpdatedSuccessfullyText(), Customer.EditCustomer.VERIFY_EDIT_CUSTOMER);
+	}
+
+	@Test
+	public void Payment_TC02_VerifyEditCustomer() {
+		verifyEquals(editCustomerPage.getUpdatedText(), Customer.EditCustomer.VERIFY_EDIT_CUSTOMER);
+		
+		verifyEquals(editCustomerPage.getAddressText(), Customer.EditCustomer.EDIT_ADDRESS);
+		verifyEquals(editCustomerPage.getCityText(), Customer.EditCustomer.EDIT_CITY);
+		verifyEquals(editCustomerPage.getStateText(), Customer.EditCustomer.EDIT_STATE);
+		verifyEquals(editCustomerPage.getPinText(), Customer.EditCustomer.EDIT_PIN);
+		verifyEquals(editCustomerPage.getMobileNoText(), Customer.EditCustomer.EDIT_MOBILE);
+
 	}
 
 	@AfterClass

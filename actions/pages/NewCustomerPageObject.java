@@ -125,18 +125,18 @@ public class NewCustomerPageObject extends AbstractPage {
 	}
 
 	public String getCustomerIDText() {
-		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.NewCustomer_Header.CUSTOMER_ID);
-		return getTextElement(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.NewCustomer_Header.CUSTOMER_ID);
+		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.CUSTOMER_ID);
+		return getTextElement(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.CUSTOMER_ID);
 	}
 
 	public String getCustomerNameText() {
-		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.NewCustomer_Header.CUSTOMER_NAME);
-		return getTextElement(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.NewCustomer_Header.CUSTOMER_NAME);
+		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.CUSTOMER_NAME);
+		return getTextElement(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.CUSTOMER_NAME);
 	}
 
 	public String getBirthdateText() {
-		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.NewCustomer_Header.DATE_OF_BIRTH);
-		String date_s = getTextElement(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.NewCustomer_Header.DATE_OF_BIRTH);
+		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.DATE_OF_BIRTH);
+		String date_s = getTextElement(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.DATE_OF_BIRTH);
 
 		Date dt = null;
 		try {
@@ -154,33 +154,33 @@ public class NewCustomerPageObject extends AbstractPage {
 	}
 
 	public String getAddressText() {
-		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.NewCustomer_Header.ADDRESS);
-		return getTextElement(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.NewCustomer_Header.ADDRESS);
+		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.ADDRESS);
+		return getTextElement(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.ADDRESS);
 	}
 
 	public String getCityText() {
-		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.NewCustomer_Header.CITY);
-		return getTextElement(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.NewCustomer_Header.CITY);
+		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.CITY);
+		return getTextElement(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.CITY);
 	}
 
 	public String getStateText() {
-		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.NewCustomer_Header.STATE);
-		return getTextElement(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.NewCustomer_Header.STATE);
+		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.STATE);
+		return getTextElement(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.STATE);
 	}
 
 	public String getPinText() {
-		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.NewCustomer_Header.PIN);
-		return getTextElement(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.NewCustomer_Header.PIN);
+		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.PIN);
+		return getTextElement(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.PIN);
 	}
 
 	public String getMobileNoText() {
-		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.NewCustomer_Header.MOBILE);
-		return getTextElement(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.NewCustomer_Header.MOBILE);
+		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.MOBILE);
+		return getTextElement(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.MOBILE);
 	}
 
 	public String getEmailText() {
-		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.NewCustomer_Header.EMAIL);
-		return getTextElement(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.NewCustomer_Header.EMAIL);
+		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.EMAIL);
+		return getTextElement(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.EMAIL);
 	}
 
 	public void clickToSubmitButton() {

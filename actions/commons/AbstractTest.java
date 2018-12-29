@@ -124,7 +124,7 @@ public class AbstractTest extends AbstractPage {
 
 			String osName = System.getProperty("os.name").toLowerCase();
 			String cmd = "";
-			// Quit browser
+			
 			driver.quit();
 
 			// Quit process
@@ -139,6 +139,7 @@ public class AbstractTest extends AbstractPage {
 				Process process = Runtime.getRuntime().exec(cmd);
 				process.waitFor();
 			}
+			
 			if (driver.toString().toLowerCase().contains("internetexplorer")) {
 				cmd = "taskkill /F /FI \"IMAGENAME eq IEDriverServer*\"";
 				Process process = Runtime.getRuntime().exec(cmd);
@@ -150,7 +151,7 @@ public class AbstractTest extends AbstractPage {
 				Process process = Runtime.getRuntime().exec(cmd);
 				process.waitFor();
 			}
-			System.out.println("----------- Quit Process -----------");
+			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

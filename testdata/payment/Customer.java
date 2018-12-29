@@ -15,7 +15,7 @@ public class Customer {
 		public static final String VERIFY_CREATE_NEW_CUSTOMER = "Customer Registered Successfully!!!";
 	}
 	
-	public class NewCustomer_Header {
+	public class Customer_Header {
 		public static final String CUSTOMER_ID = "Customer ID";
 		public static final String CUSTOMER_NAME = "Customer Name";
 		public static final String DATE_OF_BIRTH = "Birthdate";
