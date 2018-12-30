@@ -27,7 +27,7 @@
 	</appender>
 
 	<!-- Add log to testcase package -->
-	<category name="com.bankguru.account">
+	<category name="com.bankguru.payment">
 		<priority value="all" />
 		<!--appender-ref ref="console" /-->
 		<appender-ref ref="logfile" />

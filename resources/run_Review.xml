@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Bank GURU" parallel="false" thread-count="3">
+	<parameter name="browser" value="chrome" />
+	
+<!-- 	<test name="Run on Firefox">
+	<parameter name="browser" value="firefox" />
+		<classes>
+			<class name="com.bankguru.common.Common_01_CreateUser" />
+			<class name="com.bankguru.payment.TC_Review" />
+		</classes>
+	</test> -->
+	
+<!-- 	<test name="Run on Firefox headless">
+	<parameter name="browser" value="firefoxheadless" />
+		<classes>
+			<class name="com.bankguru.common.Common_01_CreateUser" />
+			<class name="com.bankguru.payment.TC_Review" />
+		</classes>
+	</test> -->
+	
+	<test name="Run on Chrome">
+	<parameter name="browser" value="chrome" />
+		<classes>
+			<class name="com.bankguru.common.Common_01_CreateUser" />
+			<class name="com.bankguru.payment.TC_Review" />
+		</classes>
+	</test>
+	
+<!-- 	<test name="Run on Chrome headless">
+	<parameter name="browser" value="chromeheadless" />
+		<classes>
+			<class name="com.bankguru.common.Common_01_CreateUser" />
+			<class name="com.bankguru.payment.TC_Review" />
+		</classes>
+	</test> -->
+	
+	<!-- <test name="Run on IE">
+	<parameter name="browser" value="ie" />
+		<classes>
+			<class name="com.bankguru.common.Common_01_CreateUser" />
+			<class name="com.bankguru.payment.TC_Review" />
+		</classes>
+	</test> -->
+</suite>

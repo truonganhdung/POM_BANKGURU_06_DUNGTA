@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.WebDriver;
 
 import bankguru.RegisterPageUI;
+
 import commons.AbstractPage;
 import commons.PageFactoryManager;
 
@@ -17,11 +18,10 @@ public class RegisterPageObject extends AbstractPage {
 		waitForControlVisible(driver, RegisterPageUI.EMAILID_TEXTBOX);
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
 			sendkeyToElementByJS(driver, RegisterPageUI.EMAILID_TEXTBOX, email);
-			staticSleep(5);
 		} else {
 			sendkeyToElement(driver, RegisterPageUI.EMAILID_TEXTBOX, email);
 		}
-		
+
 	}
 
 	public void clickToSubmitButton() {
@@ -29,7 +29,6 @@ public class RegisterPageObject extends AbstractPage {
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
 			clickToElementByJS(driver, RegisterPageUI.SUBMIT_BUTTON);
-			staticSleep(5);
 		} else {
 			clickToElement(driver, RegisterPageUI.SUBMIT_BUTTON);
 		}

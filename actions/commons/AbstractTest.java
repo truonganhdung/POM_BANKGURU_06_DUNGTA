@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -39,9 +40,9 @@ public class AbstractTest extends AbstractPage {
 			profile.setPreference("browser.download.folderList", 2);
 			profile.setPreference("browser.helperApps.alwaysAsk.force", false);
 			profile.setPreference("browser.download.manager.showWhenStaring", false);
-			profile.setPreference("browser.download.dir", "D:\\0nlineAutoTesting\\Project\\Downloads");
-			profile.setPreference("browser.download.downloadDir", "D:\\0nlineAutoTesting\\Project\\Downloads");
-			profile.setPreference("browser.download.defaultFolder", "D:\\0nlineAutoTesting\\Project\\Downloads");
+			profile.setPreference("browser.download.dir", "\\Downloads");
+			profile.setPreference("browser.download.downloadDir", "\\Downloads");
+			profile.setPreference("browser.download.defaultFolder", "\\Downloads");
 			profile.setPreference("browser.helperApps.neverAsk.saveToDisk", "text/anytext, text/plain, text/html, applocation/plain");
 			profile.setPreference("browser.private.browsing.autostart", true);
 			capabilities = DesiredCapabilities.firefox();
@@ -210,6 +211,23 @@ public class AbstractTest extends AbstractPage {
 		return pass;
 	}
 
+	public void acceptAlert(WebDriver driver, String expected) {
+		staticSleep(2);
+		
+		if (driver.toString().toLowerCase().contains("firefox")) {
+			waitForAlertPresence(driver);
+		}
+
+		Alert alert = driver.switchTo().alert();
+		
+		String verifyAlert = getTextAlert(driver);
+
+		verifyEquals(verifyAlert, expected);
+
+		alert.accept();
+		driver.switchTo().defaultContent();
+	}
+	
 	WebDriver driver;
 	protected final Log log;
 	private final String workingDir = System.getProperty("user.dir");

@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.WebDriver;
 
 import bankguru.LoginPageUI;
+
 import commons.AbstractPage;
 import commons.PageFactoryManager;
 
@@ -37,7 +38,6 @@ public class LoginPageObject extends AbstractPage {
 			clickToElement(driver, LoginPageUI.SUBMIT_BUTTON);
 		}
 
-		// return new HomePageObject(driverLoginPageObject);
 		return PageFactoryManager.getHomePage(driver);
 	}
 

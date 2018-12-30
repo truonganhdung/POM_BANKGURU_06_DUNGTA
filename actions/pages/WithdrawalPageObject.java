@@ -2,9 +2,10 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 
-import bankguru.WithdrawalPageUI;
-import commons.AbstractPage;
 import payment.DynamicLocator;
+import bankguru.WithdrawalPageUI;
+
+import commons.AbstractPage;
 
 public class WithdrawalPageObject extends AbstractPage {
 	WebDriver driver;
@@ -28,7 +29,6 @@ public class WithdrawalPageObject extends AbstractPage {
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
 			sendkeyToElementByJS(driver, accountNo, WithdrawalPageUI.DYNAMIC_TEXTBOX, DynamicLocator.ACCOUNT_NUMBER);
-			staticSleep(5);
 		} else {
 			sendkeyToElement(driver, accountNo, WithdrawalPageUI.DYNAMIC_TEXTBOX, DynamicLocator.ACCOUNT_NUMBER);
 		}
@@ -39,7 +39,6 @@ public class WithdrawalPageObject extends AbstractPage {
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
 			sendkeyToElementByJS(driver, amount, WithdrawalPageUI.DYNAMIC_TEXTBOX, DynamicLocator.AMOUNT);
-			staticSleep(5);
 		} else {
 			sendkeyToElement(driver, amount, WithdrawalPageUI.DYNAMIC_TEXTBOX, DynamicLocator.AMOUNT);
 		}
@@ -50,7 +49,6 @@ public class WithdrawalPageObject extends AbstractPage {
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
 			sendkeyToElementByJS(driver, description, WithdrawalPageUI.DYNAMIC_TEXTBOX, DynamicLocator.DESCRIPTION);
-			staticSleep(5);
 		} else {
 			sendkeyToElement(driver, description, WithdrawalPageUI.DYNAMIC_TEXTBOX, DynamicLocator.DESCRIPTION);
 		}

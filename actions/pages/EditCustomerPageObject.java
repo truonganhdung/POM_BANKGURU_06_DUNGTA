@@ -21,7 +21,6 @@ public class EditCustomerPageObject extends AbstractPage {
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
 			sendkeyToElementByJS(driver, customerID, EditCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.CUSTOMER_ID);
-			staticSleep(5);
 		} else {
 			sendkeyToElement(driver, customerID, EditCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.CUSTOMER_ID);
 		}
@@ -32,7 +31,6 @@ public class EditCustomerPageObject extends AbstractPage {
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
 			sendkeyToElementByJS(driver, address, EditCustomerPageUI.DYNAMIC_TEXTAREA, DynamicLocator.ADDRESS);
-			staticSleep(5);
 		} else {
 			sendkeyToElement(driver, address, EditCustomerPageUI.DYNAMIC_TEXTAREA, DynamicLocator.ADDRESS);
 		}
@@ -43,7 +41,6 @@ public class EditCustomerPageObject extends AbstractPage {
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
 			sendkeyToElementByJS(driver, city, EditCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.CITY);
-			staticSleep(5);
 		} else {
 			sendkeyToElement(driver, city, EditCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.CITY);
 		}
@@ -54,7 +51,6 @@ public class EditCustomerPageObject extends AbstractPage {
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
 			sendkeyToElementByJS(driver, state, EditCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.STATE);
-			staticSleep(5);
 		} else {
 			sendkeyToElement(driver, state, EditCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.STATE);
 		}
@@ -65,7 +61,6 @@ public class EditCustomerPageObject extends AbstractPage {
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
 			sendkeyToElementByJS(driver, pin, EditCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.PIN);
-			staticSleep(5);
 		} else {
 			sendkeyToElement(driver, pin, EditCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.PIN);
 		}
@@ -76,7 +71,6 @@ public class EditCustomerPageObject extends AbstractPage {
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
 			sendkeyToElementByJS(driver, mobile, EditCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.MOBILE);
-			staticSleep(5);
 		} else {
 			sendkeyToElement(driver, mobile, EditCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.MOBILE);
 		}
@@ -87,7 +81,6 @@ public class EditCustomerPageObject extends AbstractPage {
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
 			sendkeyToElementByJS(driver, email + AbstractTest.randomNumber() + "@amil.com", EditCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.EMAIL);
-			staticSleep(5);
 		} else {
 			sendkeyToElement(driver, email + AbstractTest.randomNumber() + "@amil.com", EditCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.EMAIL);
 		}
@@ -98,7 +91,6 @@ public class EditCustomerPageObject extends AbstractPage {
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
 			clickToElementByJS(driver, EditCustomerPageUI.SUBMIT_BUTTON);
-			staticSleep(5);
 		} else {
 			clickToElement(driver, EditCustomerPageUI.SUBMIT_BUTTON);
 		}

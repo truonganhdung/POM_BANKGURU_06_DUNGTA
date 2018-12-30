@@ -2,9 +2,10 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 
-import bankguru.BalanceEnquiryPageUI;
-import commons.AbstractPage;
 import payment.DynamicLocator;
+import bankguru.BalanceEnquiryPageUI;
+
+import commons.AbstractPage;
 
 public class BalanceEnquiryPageObject extends AbstractPage {
 	WebDriver driver;
@@ -28,7 +29,6 @@ public class BalanceEnquiryPageObject extends AbstractPage {
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
 			sendkeyToElementByJS(driver, accountNo, BalanceEnquiryPageUI.DYNAMIC_TEXTBOX, DynamicLocator.ACCOUNT_NUMBER);
-			staticSleep(5);
 		} else {
 			sendkeyToElement(driver, accountNo, BalanceEnquiryPageUI.DYNAMIC_TEXTBOX, DynamicLocator.ACCOUNT_NUMBER);
 		}

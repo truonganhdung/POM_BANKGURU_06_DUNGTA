@@ -2,9 +2,10 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 
-import bankguru.NewAccountPageUI;
-import commons.AbstractPage;
 import payment.DynamicLocator;
+import bankguru.NewAccountPageUI;
+
+import commons.AbstractPage;
 
 public class NewAccountPageObject extends AbstractPage {
 	WebDriver driver;
@@ -33,7 +34,6 @@ public class NewAccountPageObject extends AbstractPage {
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
 			sendkeyToElementByJS(driver, customerId, NewAccountPageUI.DYNAMIC_TEXTBOX, DynamicLocator.CUSTOMER_id);
-			staticSleep(5);
 		} else {
 			sendkeyToElement(driver, customerId, NewAccountPageUI.DYNAMIC_TEXTBOX, DynamicLocator.CUSTOMER_id);
 		}
@@ -55,7 +55,6 @@ public class NewAccountPageObject extends AbstractPage {
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
 			sendkeyToElementByJS(driver, initialDeposit, NewAccountPageUI.DYNAMIC_TEXTBOX, DynamicLocator.INITIAL_DEPOSIT);
-			staticSleep(5);
 		} else {
 			sendkeyToElement(driver, initialDeposit, NewAccountPageUI.DYNAMIC_TEXTBOX, DynamicLocator.INITIAL_DEPOSIT);
 		}

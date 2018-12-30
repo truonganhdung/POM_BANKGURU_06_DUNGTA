@@ -2,9 +2,10 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 
-import bankguru.FundTransferPageUI;
-import commons.AbstractPage;
 import payment.DynamicLocator;
+import bankguru.FundTransferPageUI;
+
+import commons.AbstractPage;
 
 public class FundTransferPageObject extends AbstractPage {
 	WebDriver driver;
@@ -29,7 +30,6 @@ public class FundTransferPageObject extends AbstractPage {
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
 			sendkeyToElementByJS(driver, payersAccountNo, FundTransferPageUI.DYNAMIC_TEXTBOX, DynamicLocator.PAYERS_ACCOUNT_NUMBER);
-			staticSleep(5);
 		} else {
 			sendkeyToElement(driver, payersAccountNo, FundTransferPageUI.DYNAMIC_TEXTBOX, DynamicLocator.PAYERS_ACCOUNT_NUMBER);
 		}
@@ -40,7 +40,6 @@ public class FundTransferPageObject extends AbstractPage {
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
 			sendkeyToElementByJS(driver, payeesAccountNo, FundTransferPageUI.DYNAMIC_TEXTBOX, DynamicLocator.PAYEES_ACCOUNT_NUMBER);
-			staticSleep(5);
 		} else {
 			sendkeyToElement(driver, payeesAccountNo, FundTransferPageUI.DYNAMIC_TEXTBOX, DynamicLocator.PAYEES_ACCOUNT_NUMBER);
 		}
@@ -51,7 +50,6 @@ public class FundTransferPageObject extends AbstractPage {
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
 			sendkeyToElementByJS(driver, amount, FundTransferPageUI.DYNAMIC_TEXTBOX, DynamicLocator.AMOUNT);
-			staticSleep(5);
 		} else {
 			sendkeyToElement(driver, amount, FundTransferPageUI.DYNAMIC_TEXTBOX, DynamicLocator.AMOUNT);
 		}
@@ -62,7 +60,6 @@ public class FundTransferPageObject extends AbstractPage {
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
 			sendkeyToElementByJS(driver, description, FundTransferPageUI.DYNAMIC_TEXTBOX, DynamicLocator.DESCRIPTION);
-			staticSleep(5);
 		} else {
 			sendkeyToElement(driver, description, FundTransferPageUI.DYNAMIC_TEXTBOX, DynamicLocator.DESCRIPTION);
 		}

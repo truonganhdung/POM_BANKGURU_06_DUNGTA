@@ -7,11 +7,12 @@ import java.util.Locale;
 
 import org.openqa.selenium.WebDriver;
 
-import bankguru.NewCustomerPageUI;
-import commons.AbstractPage;
-import commons.AbstractTest;
 import payment.Customer;
 import payment.DynamicLocator;
+import bankguru.NewCustomerPageUI;
+
+import commons.AbstractPage;
+import commons.AbstractTest;
 
 public class NewCustomerPageObject extends AbstractPage {
 	WebDriver driver;
@@ -21,7 +22,6 @@ public class NewCustomerPageObject extends AbstractPage {
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
 			sendkeyToElementByJS(driver, customerName, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.CUSTOMER_NAME);
-			staticSleep(5);
 		} else {
 			sendkeyToElement(driver, customerName, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.CUSTOMER_NAME);
 		}
@@ -32,7 +32,6 @@ public class NewCustomerPageObject extends AbstractPage {
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
 			sendkeyToElementByJS(driver, dateOfBirth, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.DATE_OF_BIRTH);
-			staticSleep(5);
 		} else {
 			setAttributeOfElementByJS(driver, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.DATE_OF_BIRTH);
 			sendkeyToElement(driver, dateOfBirth, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.DATE_OF_BIRTH);
@@ -44,7 +43,6 @@ public class NewCustomerPageObject extends AbstractPage {
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
 			sendkeyToElementByJS(driver, address, NewCustomerPageUI.DYNAMIC_TEXTAREA, DynamicLocator.ADDRESS);
-			staticSleep(5);
 		} else {
 			sendkeyToElement(driver, address, NewCustomerPageUI.DYNAMIC_TEXTAREA, DynamicLocator.ADDRESS);
 		}
@@ -55,7 +53,6 @@ public class NewCustomerPageObject extends AbstractPage {
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
 			sendkeyToElementByJS(driver, city, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.CITY);
-			staticSleep(5);
 		} else {
 			sendkeyToElement(driver, city, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.CITY);
 		}
@@ -66,7 +63,6 @@ public class NewCustomerPageObject extends AbstractPage {
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
 			sendkeyToElementByJS(driver, state, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.STATE);
-			staticSleep(5);
 		} else {
 			sendkeyToElement(driver, state, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.STATE);
 		}
@@ -77,7 +73,6 @@ public class NewCustomerPageObject extends AbstractPage {
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
 			sendkeyToElementByJS(driver, pin, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.PIN);
-			staticSleep(5);
 		} else {
 			sendkeyToElement(driver, pin, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.PIN);
 		}
@@ -88,7 +83,6 @@ public class NewCustomerPageObject extends AbstractPage {
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
 			sendkeyToElementByJS(driver, mobile, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.MOBILE);
-			staticSleep(5);
 		} else {
 			sendkeyToElement(driver, mobile, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.MOBILE);
 		}
@@ -99,7 +93,6 @@ public class NewCustomerPageObject extends AbstractPage {
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
 			sendkeyToElementByJS(driver, email + AbstractTest.randomNumber() + "@amil.com", NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.EMAIL);
-			staticSleep(5);
 		} else {
 			sendkeyToElement(driver, email + AbstractTest.randomNumber() + "@amil.com", NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.EMAIL);
 		}
@@ -109,7 +102,6 @@ public class NewCustomerPageObject extends AbstractPage {
 		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.PASSWORD);
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
 			sendkeyToElementByJS(driver, password, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.PASSWORD);
-			staticSleep(5);
 		} else {
 			sendkeyToElement(driver, password, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.PASSWORD);
 		}
@@ -144,9 +136,9 @@ public class NewCustomerPageObject extends AbstractPage {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		return myDateFormat(dt,"MM-dd-yyy");
+		return myDateFormat(dt, "MM-dd-yyy");
 	}
-	
+
 	public String myDateFormat(Date dt, String pattern) {
 		Locale locale = new Locale("en", "US");
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, locale);

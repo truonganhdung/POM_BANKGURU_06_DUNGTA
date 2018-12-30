@@ -2,9 +2,10 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 
-import bankguru.DeleteCustomerPageUI;
-import commons.AbstractPage;
 import payment.DynamicLocator;
+import bankguru.DeleteCustomerPageUI;
+
+import commons.AbstractPage;
 
 public class DeleteCustomerPageObject extends AbstractPage {
 	WebDriver driver;
@@ -18,7 +19,6 @@ public class DeleteCustomerPageObject extends AbstractPage {
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
 			sendkeyToElementByJS(driver, customerId, DeleteCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.CUSTOMER_ID);
-			staticSleep(5);
 		} else {
 			sendkeyToElement(driver, customerId, DeleteCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.CUSTOMER_ID);
 		}
