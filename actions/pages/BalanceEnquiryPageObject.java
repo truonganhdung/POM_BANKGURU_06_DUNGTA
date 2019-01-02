@@ -2,9 +2,8 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 
-import payment.DynamicLocator;
+import bankguru.AbstractPageUI;
 import bankguru.BalanceEnquiryPageUI;
-
 import commons.AbstractPage;
 
 public class BalanceEnquiryPageObject extends AbstractPage {
@@ -19,29 +18,19 @@ public class BalanceEnquiryPageObject extends AbstractPage {
 		return getTextElement(driver, BalanceEnquiryPageUI.VERIFY_BALANCE);
 	}
 
-	public String getBalance() {
-		waitForControlVisible(driver, BalanceEnquiryPageUI.VERIFY_DYNAMIC, "Balance");
-		return getTextElement(driver, BalanceEnquiryPageUI.VERIFY_DYNAMIC, "Balance");
+	public String getBalance(String locatorName) {
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_VERIFY, locatorName);
+		return getTextElement(driver, AbstractPageUI.DYNAMIC_VERIFY, locatorName);
 	}
 
-	public void inputToAccountNoTextBox(String accountNo) {
-		waitForControlVisible(driver, BalanceEnquiryPageUI.DYNAMIC_TEXTBOX, DynamicLocator.ACCOUNT_NUMBER);
+	public void inputToAccountNoTextBox(String accountNo, String locatorName) {
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_TEXTBOX, locatorName);
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
-			sendkeyToElementByJS(driver, accountNo, BalanceEnquiryPageUI.DYNAMIC_TEXTBOX, DynamicLocator.ACCOUNT_NUMBER);
+			sendkeyToElementByJS(driver, accountNo, AbstractPageUI.DYNAMIC_TEXTBOX, locatorName);
 		} else {
-			sendkeyToElement(driver, accountNo, BalanceEnquiryPageUI.DYNAMIC_TEXTBOX, DynamicLocator.ACCOUNT_NUMBER);
+			sendkeyToElement(driver, accountNo, AbstractPageUI.DYNAMIC_TEXTBOX, locatorName);
 		}
 	}
 
-	public void clickToSubmitButton() {
-		waitForControlVisible(driver, BalanceEnquiryPageUI.SUBMIT_BUTTON);
-
-		if (driver.toString().toLowerCase().contains("internetexplorer")) {
-			clickToElementByJS(driver, BalanceEnquiryPageUI.SUBMIT_BUTTON);
-			staticSleep(5);
-		} else {
-			clickToElement(driver, BalanceEnquiryPageUI.SUBMIT_BUTTON);
-		}
-	}
 }

@@ -2,8 +2,8 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 
+import bankguru.AbstractPageUI;
 import bankguru.LoginPageUI;
-
 import commons.AbstractPage;
 import commons.PageFactoryManager;
 
@@ -29,13 +29,13 @@ public class LoginPageObject extends AbstractPage {
 	}
 
 	public HomePageObject clickToLoginButton() {
-		waitForControlVisible(driver, LoginPageUI.SUBMIT_BUTTON);
+		waitForControlVisible(driver, AbstractPageUI.SUBMIT_BUTTON);
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
-			clickToElementByJS(driver, LoginPageUI.SUBMIT_BUTTON);
+			clickToElementByJS(driver, AbstractPageUI.SUBMIT_BUTTON);
 			staticSleep(5);
 		} else {
-			clickToElement(driver, LoginPageUI.SUBMIT_BUTTON);
+			clickToElement(driver, AbstractPageUI.SUBMIT_BUTTON);
 		}
 
 		return PageFactoryManager.getHomePage(driver);

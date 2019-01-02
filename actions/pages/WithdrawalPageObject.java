@@ -2,10 +2,10 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 
-import payment.DynamicLocator;
+import bankguru.AbstractPageUI;
 import bankguru.WithdrawalPageUI;
-
 import commons.AbstractPage;
+import payment.DynamicLocator;
 
 public class WithdrawalPageObject extends AbstractPage {
 	WebDriver driver;
@@ -20,48 +20,27 @@ public class WithdrawalPageObject extends AbstractPage {
 	}
 
 	public String getCurrentBalance() {
-		waitForControlVisible(driver, WithdrawalPageUI.VERIFY_DYNAMIC, "Current Balance");
-		return getTextElement(driver, WithdrawalPageUI.VERIFY_DYNAMIC, "Current Balance");
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_VERIFY, "Current Balance");
+		return getTextElement(driver, AbstractPageUI.DYNAMIC_VERIFY, "Current Balance");
 	}
 
 	public void inputToAccountNoTextBox(String accountNo) {
-		waitForControlVisible(driver, WithdrawalPageUI.DYNAMIC_TEXTBOX, DynamicLocator.ACCOUNT_NUMBER);
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.ACCOUNT_NUMBER);
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
-			sendkeyToElementByJS(driver, accountNo, WithdrawalPageUI.DYNAMIC_TEXTBOX, DynamicLocator.ACCOUNT_NUMBER);
+			sendkeyToElementByJS(driver, accountNo, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.ACCOUNT_NUMBER);
 		} else {
-			sendkeyToElement(driver, accountNo, WithdrawalPageUI.DYNAMIC_TEXTBOX, DynamicLocator.ACCOUNT_NUMBER);
+			sendkeyToElement(driver, accountNo, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.ACCOUNT_NUMBER);
 		}
 	}
 
 	public void inputToAmountTextBox(String amount) {
-		waitForControlVisible(driver, WithdrawalPageUI.DYNAMIC_TEXTBOX, DynamicLocator.AMOUNT);
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.AMOUNT);
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
-			sendkeyToElementByJS(driver, amount, WithdrawalPageUI.DYNAMIC_TEXTBOX, DynamicLocator.AMOUNT);
+			sendkeyToElementByJS(driver, amount, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.AMOUNT);
 		} else {
-			sendkeyToElement(driver, amount, WithdrawalPageUI.DYNAMIC_TEXTBOX, DynamicLocator.AMOUNT);
-		}
-	}
-
-	public void inputToDescriptionTextBox(String description) {
-		waitForControlVisible(driver, WithdrawalPageUI.DYNAMIC_TEXTBOX, DynamicLocator.DESCRIPTION);
-
-		if (driver.toString().toLowerCase().contains("internetexplorer")) {
-			sendkeyToElementByJS(driver, description, WithdrawalPageUI.DYNAMIC_TEXTBOX, DynamicLocator.DESCRIPTION);
-		} else {
-			sendkeyToElement(driver, description, WithdrawalPageUI.DYNAMIC_TEXTBOX, DynamicLocator.DESCRIPTION);
-		}
-	}
-
-	public void clickToSubmitButton() {
-		waitForControlVisible(driver, WithdrawalPageUI.SUBMIT_BUTTON);
-
-		if (driver.toString().toLowerCase().contains("internetexplorer")) {
-			clickToElementByJS(driver, WithdrawalPageUI.SUBMIT_BUTTON);
-			staticSleep(5);
-		} else {
-			clickToElement(driver, WithdrawalPageUI.SUBMIT_BUTTON);
+			sendkeyToElement(driver, amount, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.AMOUNT);
 		}
 	}
 

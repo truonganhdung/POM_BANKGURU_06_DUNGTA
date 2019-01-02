@@ -2,8 +2,8 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 
+import bankguru.AbstractPageUI;
 import bankguru.RegisterPageUI;
-
 import commons.AbstractPage;
 import commons.PageFactoryManager;
 
@@ -25,12 +25,12 @@ public class RegisterPageObject extends AbstractPage {
 	}
 
 	public void clickToSubmitButton() {
-		waitForControlVisible(driver, RegisterPageUI.SUBMIT_BUTTON);
+		waitForControlVisible(driver, AbstractPageUI.SUBMIT_BUTTON);
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
-			clickToElementByJS(driver, RegisterPageUI.SUBMIT_BUTTON);
+			clickToElementByJS(driver, AbstractPageUI.SUBMIT_BUTTON);
 		} else {
-			clickToElement(driver, RegisterPageUI.SUBMIT_BUTTON);
+			clickToElement(driver, AbstractPageUI.SUBMIT_BUTTON);
 		}
 	}
 

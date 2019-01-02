@@ -7,34 +7,34 @@ import java.util.Locale;
 
 import org.openqa.selenium.WebDriver;
 
-import payment.Customer;
-import payment.DynamicLocator;
+import bankguru.AbstractPageUI;
 import bankguru.NewCustomerPageUI;
-
 import commons.AbstractPage;
 import commons.AbstractTest;
+import payment.Customer;
+import payment.DynamicLocator;
 
 public class NewCustomerPageObject extends AbstractPage {
 	WebDriver driver;
 
 	public void inputToCustomerNameTextBox(String customerName) {
-		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.CUSTOMER_NAME);
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.CUSTOMER_NAME);
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
-			sendkeyToElementByJS(driver, customerName, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.CUSTOMER_NAME);
+			sendkeyToElementByJS(driver, customerName, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.CUSTOMER_NAME);
 		} else {
-			sendkeyToElement(driver, customerName, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.CUSTOMER_NAME);
+			sendkeyToElement(driver, customerName, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.CUSTOMER_NAME);
 		}
 	}
 
 	public void inputToDoBTextBox(String dateOfBirth) {
-		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.DATE_OF_BIRTH);
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.DATE_OF_BIRTH);
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
-			sendkeyToElementByJS(driver, dateOfBirth, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.DATE_OF_BIRTH);
+			sendkeyToElementByJS(driver, dateOfBirth, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.DATE_OF_BIRTH);
 		} else {
-			setAttributeOfElementByJS(driver, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.DATE_OF_BIRTH);
-			sendkeyToElement(driver, dateOfBirth, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.DATE_OF_BIRTH);
+			setAttributeOfElementByJS(driver, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.DATE_OF_BIRTH);
+			sendkeyToElement(driver, dateOfBirth, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.DATE_OF_BIRTH);
 		}
 	}
 
@@ -49,61 +49,61 @@ public class NewCustomerPageObject extends AbstractPage {
 	}
 
 	public void inputToCityTextBox(String city) {
-		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.CITY);
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.CITY);
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
-			sendkeyToElementByJS(driver, city, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.CITY);
+			sendkeyToElementByJS(driver, city, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.CITY);
 		} else {
-			sendkeyToElement(driver, city, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.CITY);
+			sendkeyToElement(driver, city, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.CITY);
 		}
 	}
 
 	public void inputToStateTextBox(String state) {
-		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.STATE);
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.STATE);
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
-			sendkeyToElementByJS(driver, state, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.STATE);
+			sendkeyToElementByJS(driver, state, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.STATE);
 		} else {
-			sendkeyToElement(driver, state, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.STATE);
+			sendkeyToElement(driver, state, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.STATE);
 		}
 	}
 
 	public void inputToPinTextBox(String pin) {
-		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.PIN);
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.PIN);
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
-			sendkeyToElementByJS(driver, pin, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.PIN);
+			sendkeyToElementByJS(driver, pin, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.PIN);
 		} else {
-			sendkeyToElement(driver, pin, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.PIN);
+			sendkeyToElement(driver, pin, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.PIN);
 		}
 	}
 
 	public void inputToMobileTextBox(String mobile) {
-		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.MOBILE);
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.MOBILE);
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
-			sendkeyToElementByJS(driver, mobile, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.MOBILE);
+			sendkeyToElementByJS(driver, mobile, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.MOBILE);
 		} else {
-			sendkeyToElement(driver, mobile, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.MOBILE);
+			sendkeyToElement(driver, mobile, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.MOBILE);
 		}
 	}
 
 	public void inputToEmailTextBox(String email) {
-		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.EMAIL);
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.EMAIL);
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
-			sendkeyToElementByJS(driver, email + AbstractTest.randomNumber() + "@amil.com", NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.EMAIL);
+			sendkeyToElementByJS(driver, email + AbstractTest.randomNumber() + "@amil.com", AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.EMAIL);
 		} else {
-			sendkeyToElement(driver, email + AbstractTest.randomNumber() + "@amil.com", NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.EMAIL);
+			sendkeyToElement(driver, email + AbstractTest.randomNumber() + "@amil.com", AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.EMAIL);
 		}
 	}
 
 	public void inputToPasswordTextBox(String password) {
-		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.PASSWORD);
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.PASSWORD);
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
-			sendkeyToElementByJS(driver, password, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.PASSWORD);
+			sendkeyToElementByJS(driver, password, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.PASSWORD);
 		} else {
-			sendkeyToElement(driver, password, NewCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.PASSWORD);
+			sendkeyToElement(driver, password, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.PASSWORD);
 		}
 	}
 
@@ -117,18 +117,18 @@ public class NewCustomerPageObject extends AbstractPage {
 	}
 
 	public String getCustomerIDText() {
-		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.CUSTOMER_ID);
-		return getTextElement(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.CUSTOMER_ID);
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.CUSTOMER_ID);
+		return getTextElement(driver, AbstractPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.CUSTOMER_ID);
 	}
 
 	public String getCustomerNameText() {
-		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.CUSTOMER_NAME);
-		return getTextElement(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.CUSTOMER_NAME);
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.CUSTOMER_NAME);
+		return getTextElement(driver, AbstractPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.CUSTOMER_NAME);
 	}
 
 	public String getBirthdateText() {
-		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.DATE_OF_BIRTH);
-		String date_s = getTextElement(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.DATE_OF_BIRTH);
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.DATE_OF_BIRTH);
+		String date_s = getTextElement(driver, AbstractPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.DATE_OF_BIRTH);
 
 		Date dt = null;
 		try {
@@ -146,43 +146,43 @@ public class NewCustomerPageObject extends AbstractPage {
 	}
 
 	public String getAddressText() {
-		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.ADDRESS);
-		return getTextElement(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.ADDRESS);
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.ADDRESS);
+		return getTextElement(driver, AbstractPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.ADDRESS);
 	}
 
 	public String getCityText() {
-		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.CITY);
-		return getTextElement(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.CITY);
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.CITY);
+		return getTextElement(driver, AbstractPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.CITY);
 	}
 
 	public String getStateText() {
-		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.STATE);
-		return getTextElement(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.STATE);
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.STATE);
+		return getTextElement(driver, AbstractPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.STATE);
 	}
 
 	public String getPinText() {
-		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.PIN);
-		return getTextElement(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.PIN);
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.PIN);
+		return getTextElement(driver, AbstractPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.PIN);
 	}
 
 	public String getMobileNoText() {
-		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.MOBILE);
-		return getTextElement(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.MOBILE);
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.MOBILE);
+		return getTextElement(driver, AbstractPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.MOBILE);
 	}
 
 	public String getEmailText() {
-		waitForControlVisible(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.EMAIL);
-		return getTextElement(driver, NewCustomerPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.EMAIL);
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.EMAIL);
+		return getTextElement(driver, AbstractPageUI.DYNAMIC_VERIFY, Customer.Customer_Header.EMAIL);
 	}
 
 	public void clickToSubmitButton() {
-		waitForControlVisible(driver, NewCustomerPageUI.SUBMIT_BUTTON);
+		waitForControlVisible(driver, AbstractPageUI.SUBMIT_BUTTON);
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
-			clickToElementByJS(driver, NewCustomerPageUI.SUBMIT_BUTTON);
+			clickToElementByJS(driver, AbstractPageUI.SUBMIT_BUTTON);
 			staticSleep(5);
 		} else {
-			clickToElement(driver, NewCustomerPageUI.SUBMIT_BUTTON);
+			clickToElement(driver, AbstractPageUI.SUBMIT_BUTTON);
 		}
 	}
 

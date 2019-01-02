@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -19,6 +18,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import bankguru.AbstractPageUI;
 import pages.BalanceEnquiryPageObject;
 import pages.DeleteAccountPageObject;
 import pages.DeleteCustomerPageObject;
@@ -30,7 +30,7 @@ import pages.LoginPageObject;
 import pages.NewAccountPageObject;
 import pages.NewCustomerPageObject;
 import pages.WithdrawalPageObject;
-import bankguru.AbstractPageUI;
+import payment.DynamicLocator;
 
 public class AbstractPage {
 	public void openAnyUrl(WebDriver driver, String url) {
@@ -752,6 +752,28 @@ public class AbstractPage {
 
 		acceptAlert(driver);
 		return PageFactoryManager.getLogInPage(driver);
+	}
+
+	/*** Common ***/
+	public void clickToSubmitButton(WebDriver driver) {
+		waitForControlVisible(driver, AbstractPageUI.SUBMIT_BUTTON);
+
+		if (driver.toString().toLowerCase().contains("internetexplorer")) {
+			clickToElementByJS(driver, AbstractPageUI.SUBMIT_BUTTON);
+			staticSleep(5);
+		} else {
+			clickToElement(driver, AbstractPageUI.SUBMIT_BUTTON);
+		}
+	}
+
+	public void inputToDescriptionTextBox(WebDriver driver, String description) {
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.DESCRIPTION);
+
+		if (driver.toString().toLowerCase().contains("internetexplorer")) {
+			sendkeyToElementByJS(driver, description, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.DESCRIPTION);
+		} else {
+			sendkeyToElement(driver, description, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.DESCRIPTION);
+		}
 	}
 
 	private Actions action;

@@ -6,6 +6,10 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.bankguru.common.Common_01_CreateUser;
+
+import commons.AbstractTest;
+import commons.PageFactoryManager;
 import pages.BalanceEnquiryPageObject;
 import pages.DeleteAccountPageObject;
 import pages.DeleteCustomerPageObject;
@@ -21,12 +25,9 @@ import payment.Account;
 import payment.BalanceEnquiry;
 import payment.Customer;
 import payment.Deposit;
+import payment.DynamicLocator;
 import payment.FundTransfer;
 import payment.Withdrawal;
-
-import com.bankguru.common.Common_01_CreateUser;
-import commons.AbstractTest;
-import commons.PageFactoryManager;
 
 public class TC_Review extends AbstractTest {
 
@@ -45,7 +46,7 @@ public class TC_Review extends AbstractTest {
 	}
 
 	@Test
-	public void Payment_TC01_1_CreateNewCustomer() {
+	public void Payment_TC01_CreateNewCustomer() {
 		log.info("---Begin of TC01_CreateNewCustomer---");
 		newCustomerPage = homePage.openNewCustomerPage(driver);
 
@@ -64,13 +65,6 @@ public class TC_Review extends AbstractTest {
 		log.info("---Get new Customer ID---");
 		customerID = newCustomerPage.getCustomerIDText();
 
-		log.info("---End of TC01_CreateNewCustomer---");
-	}
-
-	@Test
-	public void Payment_TC01_2_VerifyNewCustomer() {
-		log.info("---Begin of TC01_VerifyNewCustomer---");
-
 		log.info("---Verify new Customer created successfully---");
 		verifyEquals(newCustomerPage.getRegisteredText(), Customer.NewCustomer.VERIFY_CREATE_NEW_CUSTOMER);
 
@@ -81,17 +75,18 @@ public class TC_Review extends AbstractTest {
 		verifyEquals(newCustomerPage.getStateText(), Customer.NewCustomer.STATE);
 		verifyEquals(newCustomerPage.getPinText(), Customer.NewCustomer.PIN);
 		verifyEquals(newCustomerPage.getMobileNoText(), Customer.NewCustomer.MOBILE);
-		log.info("---End of TC01_VerifyNewCustomer---");
+
+		log.info("---End of TC01_CreateNewCustomer---");
 	}
 
 	@Test
-	public void Payment_TC02_1_EditCustomer() {
+	public void Payment_TC02_EditCustomer() {
 		log.info("---Begin of TC02_EditCustomer---");
 		editCustomerPage = newCustomerPage.openEditCustomerPage(driver);
 
 		log.info("---Input CustomerID to edit---");
 		editCustomerPage.inputToCustomerIdTextBox(customerID);
-		editCustomerPage.clickToSubmitButton();
+		clickToSubmitButton(driver);
 
 		editCustomerPage = PageFactoryManager.getEditCustomerPage(driver);
 
@@ -102,14 +97,7 @@ public class TC_Review extends AbstractTest {
 		editCustomerPage.editToPinTextBox(Customer.EditCustomer.EDIT_PIN);
 		editCustomerPage.editToMobileTextBox(Customer.EditCustomer.EDIT_MOBILE);
 		editCustomerPage.editToEmailTextBox(Customer.EditCustomer.EDIT_PREFIX_EMAIL);
-		editCustomerPage.clickToSubmitButton();
-		
-		log.info("---End of TC02_EditCustomer---");
-	}
-
-	@Test
-	public void Payment_TC02_2_VerifyEditCustomer() {
-		log.info("---Begin of TC02_VerifyEditCustomer---");
+		clickToSubmitButton(driver);
 
 		log.info("---Verify Customer editted successfully---");
 		verifyEquals(editCustomerPage.getUpdatedText(), Customer.EditCustomer.VERIFY_EDIT_CUSTOMER);
@@ -119,8 +107,8 @@ public class TC_Review extends AbstractTest {
 		verifyEquals(editCustomerPage.getStateText(), Customer.EditCustomer.EDIT_STATE);
 		verifyEquals(editCustomerPage.getPinText(), Customer.EditCustomer.EDIT_PIN);
 		verifyEquals(editCustomerPage.getMobileNoText(), Customer.EditCustomer.EDIT_MOBILE);
-		
-		log.info("---End of TC02_VerifyEditCustomer---");
+
+		log.info("---End of TC02_EditCustomer---");
 	}
 
 	@Test
@@ -132,7 +120,7 @@ public class TC_Review extends AbstractTest {
 		newAccountPage.inputToCustomerIdTextBox(customerID);
 		newAccountPage.selectAccountTypeFromDropdownList(Account.NewAccount.ACCOUNT_TYPE);
 		newAccountPage.inputToInitialDepositTextBox(Account.NewAccount.INITIAL_DEPOSIT);
-		newAccountPage.clickToSubmitButton();
+		clickToSubmitButton(driver);
 
 		log.info("---Verify new Account Payers created---");
 		verifyEquals(newAccountPage.getGeneratedSuccessfullyText(), Account.NewAccount.VERIFY_CREATE_ACCOUNT);
@@ -152,8 +140,8 @@ public class TC_Review extends AbstractTest {
 		log.info("---Deposit---");
 		depositPage.inputToAccountNoTextBox(accountIDPayers);
 		depositPage.inputToAmountTextBox(Deposit.AMOUNT);
-		depositPage.inputToDescriptionTextBox(Deposit.DESCRIPTION);
-		depositPage.clickToSubmitButton();
+		inputToDescriptionTextBox(driver, Deposit.DESCRIPTION);
+		clickToSubmitButton(driver);
 
 		log.info("---Verify Deposit successful---");
 		String verifyDeposit = "Transaction details of Deposit for Account " + accountIDPayers;
@@ -171,8 +159,8 @@ public class TC_Review extends AbstractTest {
 		log.info("---Withdrawal---");
 		withdrawalPage.inputToAccountNoTextBox(accountIDPayers);
 		withdrawalPage.inputToAmountTextBox(Withdrawal.AMOUNT);
-		withdrawalPage.inputToDescriptionTextBox(Withdrawal.DESCRIPTION);
-		withdrawalPage.clickToSubmitButton();
+		inputToDescriptionTextBox(driver, Withdrawal.DESCRIPTION);
+		clickToSubmitButton(driver);
 
 		log.info("---Verify Withdrawal successful---");
 		String verifyWithdrawal = "Transaction details of Withdrawal for Account " + accountIDPayers;
@@ -191,18 +179,18 @@ public class TC_Review extends AbstractTest {
 		newAccountPage.inputToCustomerIdTextBox(customerID);
 		newAccountPage.selectAccountTypeFromDropdownList(Account.NewAccount.ACCOUNT_TYPE);
 		newAccountPage.inputToInitialDepositTextBox(Account.NewAccount.INITIAL_DEPOSIT);
-		newAccountPage.clickToSubmitButton();
+		clickToSubmitButton(driver);
 
 		log.info("---Verify new Account Payers created---");
 		verifyEquals(newAccountPage.getGeneratedSuccessfullyText(), Account.NewAccount.VERIFY_CREATE_ACCOUNT);
 		verifyEquals(newAccountPage.getCurrentAmount(), Account.NewAccount.INITIAL_DEPOSIT);
 
-		log.info("---Get new Account Payers ID---");
+		log.info("---Get new Account Payees ID---");
 		accountIDPayees = newAccountPage.getAccountID();
 
 		log.info("---End of TC06_NewAccount_Payees---");
 	}
-	
+
 	@Test
 	public void Payment_TC06_2_FundTransfer() {
 		log.info("---Begin of TC06_FundTransfer---");
@@ -212,8 +200,8 @@ public class TC_Review extends AbstractTest {
 		fundTransferPage.inputToPayersAccountNoTextBox(accountIDPayers);
 		fundTransferPage.inputToPayeesAccountNoTextBox(accountIDPayees);
 		fundTransferPage.inputToAmountTextBox(FundTransfer.AMOUNT);
-		fundTransferPage.inputToDescriptionTextBox(FundTransfer.DESCRIPTION);
-		fundTransferPage.clickToSubmitButton();
+		inputToDescriptionTextBox(driver, FundTransfer.DESCRIPTION);
+		clickToSubmitButton(driver);
 
 		log.info("---Verify Fund transfer successful---");
 		verifyEquals(fundTransferPage.getAmount(), FundTransfer.AMOUNT);
@@ -226,14 +214,14 @@ public class TC_Review extends AbstractTest {
 		log.info("---Begin of TC07_BalanceEnquiry---");
 		balanceEnquiryPage = fundTransferPage.openBalanceEnquiryPage(driver);
 
-		balanceEnquiryPage.inputToAccountNoTextBox(accountIDPayers);
-		balanceEnquiryPage.clickToSubmitButton();
+		balanceEnquiryPage.inputToAccountNoTextBox(accountIDPayers, DynamicLocator.ACCOUNT_NUMBER);
+		clickToSubmitButton(driver);
 		balanceEnquiryPage = PageFactoryManager.getBalanceEnquiryPage(driver);
 
 		log.info("---Verify Balance Enquiry successful---");
 		String Verify_BalanceDetails = "Balance Details for Account " + accountIDPayers;
 		verifyEquals(balanceEnquiryPage.getBalanceDetailsText(), Verify_BalanceDetails);
-		verifyEquals(balanceEnquiryPage.getBalance(), BalanceEnquiry.BALANCE);
+		verifyEquals(balanceEnquiryPage.getBalance(BalanceEnquiry.BALANCE_HEADER), BalanceEnquiry.BALANCE);
 
 		log.info("---End of TC07_BalanceEnquiry---");
 	}
@@ -245,7 +233,7 @@ public class TC_Review extends AbstractTest {
 
 		log.info("---Delete account Payers---");
 		deleteAccountPage.inputToAccountNoTextBox(accountIDPayers);
-		deleteAccountPage.clickToSubmitButton();
+		clickToSubmitButton(driver);
 		acceptAlert(driver);
 		acceptAlert(driver, Account.DeleteAccount.VERIFY_DELETE_ACCOUNT);
 
@@ -259,7 +247,7 @@ public class TC_Review extends AbstractTest {
 
 		log.info("---Delete account Payees---");
 		deleteAccountPage.inputToAccountNoTextBox(accountIDPayees);
-		deleteAccountPage.clickToSubmitButton();
+		clickToSubmitButton(driver);
 		acceptAlert(driver);
 		acceptAlert(driver, Account.DeleteAccount.VERIFY_DELETE_ACCOUNT);
 
@@ -273,7 +261,7 @@ public class TC_Review extends AbstractTest {
 
 		log.info("---Delete Customer---");
 		deleteCustomerPage.inputToCustomerIdTextBox(customerID);
-		deleteCustomerPage.clickToSubmitButton();
+		clickToSubmitButton(driver);
 		acceptAlert(driver);
 		acceptAlert(driver, Customer.DeleteCustomer.VERIFY_DELETE_CUSTOMER);
 

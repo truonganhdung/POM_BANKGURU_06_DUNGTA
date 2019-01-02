@@ -2,10 +2,10 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 
-import payment.DynamicLocator;
+import bankguru.AbstractPageUI;
 import bankguru.FundTransferPageUI;
-
 import commons.AbstractPage;
+import payment.DynamicLocator;
 
 public class FundTransferPageObject extends AbstractPage {
 	WebDriver driver;
@@ -21,58 +21,37 @@ public class FundTransferPageObject extends AbstractPage {
 	}
 
 	public String getAmount() {
-		waitForControlVisible(driver, FundTransferPageUI.VERIFY_DYNAMIC, "Amount");
-		return getTextElement(driver, FundTransferPageUI.VERIFY_DYNAMIC, "Amount");
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_VERIFY, "Amount");
+		return getTextElement(driver, AbstractPageUI.DYNAMIC_VERIFY, "Amount");
 	}
 
 	public void inputToPayersAccountNoTextBox(String payersAccountNo) {
-		waitForControlVisible(driver, FundTransferPageUI.DYNAMIC_TEXTBOX, DynamicLocator.PAYERS_ACCOUNT_NUMBER);
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.PAYERS_ACCOUNT_NUMBER);
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
-			sendkeyToElementByJS(driver, payersAccountNo, FundTransferPageUI.DYNAMIC_TEXTBOX, DynamicLocator.PAYERS_ACCOUNT_NUMBER);
+			sendkeyToElementByJS(driver, payersAccountNo, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.PAYERS_ACCOUNT_NUMBER);
 		} else {
-			sendkeyToElement(driver, payersAccountNo, FundTransferPageUI.DYNAMIC_TEXTBOX, DynamicLocator.PAYERS_ACCOUNT_NUMBER);
+			sendkeyToElement(driver, payersAccountNo, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.PAYERS_ACCOUNT_NUMBER);
 		}
 	}
 
 	public void inputToPayeesAccountNoTextBox(String payeesAccountNo) {
-		waitForControlVisible(driver, FundTransferPageUI.DYNAMIC_TEXTBOX, DynamicLocator.PAYEES_ACCOUNT_NUMBER);
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.PAYEES_ACCOUNT_NUMBER);
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
-			sendkeyToElementByJS(driver, payeesAccountNo, FundTransferPageUI.DYNAMIC_TEXTBOX, DynamicLocator.PAYEES_ACCOUNT_NUMBER);
+			sendkeyToElementByJS(driver, payeesAccountNo, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.PAYEES_ACCOUNT_NUMBER);
 		} else {
-			sendkeyToElement(driver, payeesAccountNo, FundTransferPageUI.DYNAMIC_TEXTBOX, DynamicLocator.PAYEES_ACCOUNT_NUMBER);
+			sendkeyToElement(driver, payeesAccountNo, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.PAYEES_ACCOUNT_NUMBER);
 		}
 	}
 
 	public void inputToAmountTextBox(String amount) {
-		waitForControlVisible(driver, FundTransferPageUI.DYNAMIC_TEXTBOX, DynamicLocator.AMOUNT);
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.AMOUNT);
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
-			sendkeyToElementByJS(driver, amount, FundTransferPageUI.DYNAMIC_TEXTBOX, DynamicLocator.AMOUNT);
+			sendkeyToElementByJS(driver, amount, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.AMOUNT);
 		} else {
-			sendkeyToElement(driver, amount, FundTransferPageUI.DYNAMIC_TEXTBOX, DynamicLocator.AMOUNT);
-		}
-	}
-
-	public void inputToDescriptionTextBox(String description) {
-		waitForControlVisible(driver, FundTransferPageUI.DYNAMIC_TEXTBOX, DynamicLocator.DESCRIPTION);
-
-		if (driver.toString().toLowerCase().contains("internetexplorer")) {
-			sendkeyToElementByJS(driver, description, FundTransferPageUI.DYNAMIC_TEXTBOX, DynamicLocator.DESCRIPTION);
-		} else {
-			sendkeyToElement(driver, description, FundTransferPageUI.DYNAMIC_TEXTBOX, DynamicLocator.DESCRIPTION);
-		}
-	}
-
-	public void clickToSubmitButton() {
-		waitForControlVisible(driver, FundTransferPageUI.SUBMIT_BUTTON);
-
-		if (driver.toString().toLowerCase().contains("internetexplorer")) {
-			clickToElementByJS(driver, FundTransferPageUI.SUBMIT_BUTTON);
-			staticSleep(5);
-		} else {
-			clickToElement(driver, FundTransferPageUI.SUBMIT_BUTTON);
+			sendkeyToElement(driver, amount, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.AMOUNT);
 		}
 	}
 

@@ -2,10 +2,9 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 
-import payment.DynamicLocator;
-import bankguru.DeleteCustomerPageUI;
-
+import bankguru.AbstractPageUI;
 import commons.AbstractPage;
+import payment.DynamicLocator;
 
 public class DeleteCustomerPageObject extends AbstractPage {
 	WebDriver driver;
@@ -15,23 +14,12 @@ public class DeleteCustomerPageObject extends AbstractPage {
 	}
 
 	public void inputToCustomerIdTextBox(String customerId) {
-		waitForControlVisible(driver, DeleteCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.CUSTOMER_ID);
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.CUSTOMER_ID);
 
 		if (driver.toString().toLowerCase().contains("internetexplorer")) {
-			sendkeyToElementByJS(driver, customerId, DeleteCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.CUSTOMER_ID);
+			sendkeyToElementByJS(driver, customerId, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.CUSTOMER_ID);
 		} else {
-			sendkeyToElement(driver, customerId, DeleteCustomerPageUI.DYNAMIC_TEXTBOX, DynamicLocator.CUSTOMER_ID);
-		}
-	}
-
-	public void clickToSubmitButton() {
-		waitForControlVisible(driver, DeleteCustomerPageUI.SUBMIT_BUTTON);
-
-		if (driver.toString().toLowerCase().contains("internetexplorer")) {
-			clickToElementByJS(driver, DeleteCustomerPageUI.SUBMIT_BUTTON);
-			staticSleep(5);
-		} else {
-			clickToElement(driver, DeleteCustomerPageUI.SUBMIT_BUTTON);
+			sendkeyToElement(driver, customerId, AbstractPageUI.DYNAMIC_TEXTBOX, DynamicLocator.CUSTOMER_ID);
 		}
 	}
 
